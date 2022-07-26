@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="chatRoomContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: lightyellow;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.goindol.teamtalk.client.controller.ChatController">
+    <top>
+        <VBox prefHeight="120.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+            <children>
+                <Pane prefHeight="200.0" prefWidth="200.0">
+                    <children>
+                        <Label fx:id="chatRoomTitle" layoutX="185.0" layoutY="24.0" text="Label" />
+                        <Label fx:id="chatRoomInfo" layoutX="327.0" layoutY="32.0" text="채팅방 정보" />
+                        <ImageView fx:id="goBackButton" fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="15.0" onMouseClicked="#goToBack" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../images/goToBack.png" />
+                        </ImageView>
+
+                    </children>
+                </Pane>
+                <Pane prefHeight="200.0" prefWidth="200.0">
+                    <children>
+                        <HBox layoutX="1.0" prefHeight="60.0" prefWidth="400.0">
+                            <children>
+                                <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black;">
+                                    <children>
+                                        <Label fx:id="noticeCheck" alignment="CENTER" layoutX="10.0" prefHeight="60.0" prefWidth="80.0" text="공지" />
+                                    </children>
+                                </Pane>
+                                <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black;">
+                                    <children>
+                                        <Label fx:id="noticeMake" alignment="CENTER" layoutX="10.0" prefHeight="60.0" prefWidth="80.0" text="공지생성" />
+                                    </children>
+                                </Pane>
+                                <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black;">
+                                    <children>
+                                        <Label fx:id="voteCheck" alignment="CENTER" layoutX="10.0" prefHeight="60.0" prefWidth="80.0" text="투표" />
+                                    </children>
+                                </Pane>
+                                <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black;">
+                                    <children>
+                                        <Label fx:id="voteMake" alignment="CENTER" layoutX="10.0" prefHeight="60.0" prefWidth="80.0" text="투표생성" />
+                                    </children>
+                                </Pane>
+                            </children>
+                        </HBox>
+                    </children>
+                </Pane>
+            </children>
+        </VBox>
+    </top>
+    <center>
+        <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <content>
+                <ListView fx:id="chat" prefHeight="420.0" prefWidth="398.0" />
+            </content>
+        </ScrollPane>
+    </center>
+    <bottom>
+        <HBox prefHeight="58.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+            <children>
+                <Pane prefHeight="58.0" prefWidth="470.0">
+                    <children>
+                        <TextArea fx:id="userInput" layoutX="1.0" layoutY="1.0" prefHeight="55.0" prefWidth="335.0" />
+                    </children>
+                </Pane>
+                <Pane prefHeight="200.0" prefWidth="200.0">
+                    <children>
+                        <Label fx:id="send" layoutX="18.0" layoutY="21.0" text="전송" />
+                    </children>
+                </Pane>
+            </children>
+        </HBox>
+    </bottom>
+</BorderPane>
