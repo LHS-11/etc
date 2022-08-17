@@ -1,4 +1,4 @@
-package site.metacoding.domain;
+package site.metacoding.junitproject.domain;
 
 import lombok.Builder;
 import lombok.Getter;
