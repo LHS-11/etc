@@ -15,7 +15,7 @@ spring:
     console:
       enabled: true
   jpa:
-    open-in-view: true
+    open-in-view: true # 지연 로딩 가능하게 해줌
     hibernate:
       ddl-auto: create
       naming:
