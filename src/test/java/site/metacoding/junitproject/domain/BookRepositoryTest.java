@@ -81,9 +81,8 @@ public class BookRepositoryTest {
         assertEquals(author, bookPS.getAuthor());
     }
 
-    //4. 책 수정
 
-    //5. 책 삭제
+    //4. 책 삭제
     @Sql("classpath:db/tableInit.sql") // id를 사용하는 테스트에 붙여주는게 좋음
     @Test
     public void 책삭제_test(){
@@ -96,5 +95,30 @@ public class BookRepositoryTest {
         Optional<Book> bookPS = bookRepository.findById(id);
 
         assertFalse(bookPS.isPresent());
+    }
+
+    //5. 책 수정
+    @Sql("classpath:db/tableInit.sql") // 번호가 연관이 된다면 한번 초기화가 필요
+    @Test
+    public void 책수정_test(){
+        //given
+        Long id = 1L;
+        String title = "junit5";
+        String author = "메타코딩";
+        Book book = new Book(id, title, author);
+
+        //when
+        Book bookPS = bookRepository.save(book);
+       /* bookRepository.findAll().stream()
+                .forEach(book1 -> {
+                    System.out.println("book1 = " + book1.getId());
+                    System.out.println("book1 = " + book1.getTitle());
+                    System.out.println("book1 = " + book1.getAuthor());
+                });*/
+
+        //then
+        assertEquals(title,bookPS.getTitle());
+        assertEquals(author,bookPS.getAuthor());
+
     }
 }
