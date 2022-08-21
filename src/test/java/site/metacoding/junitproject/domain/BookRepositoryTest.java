@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest // DB와 관련된 컴포넌트인 메모리에 로딩
 public class BookRepositoryTest {
 
-    @Autowired
+    @Autowired // DataJpaTest 어노테이셔이 없으면 주입이 안됨
     private BookRepository bookRepository;
 
     //@BeforeAll // 테스트 시작 전에 한번만 실행
