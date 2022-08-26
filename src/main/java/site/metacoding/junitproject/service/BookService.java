@@ -28,21 +28,22 @@ public class BookService {
         }
         // 이대로 DB에 save 된걸 가져오면 영속화된 데이터이기 때문에 이 값을 못나나게 막아줘야 한다.
         // 안그러면 다른 변수가 생겨서 바뀔때 값이 이상해 질 수 있음, 그래서 BookRespDto로 변환
-        return new BookRespDto().toDto(bookPS); // static으로 만들면 new 객체 생성 안해도 됨
+        return bookPS.toDto(); // static으로 만들면 new 객체 생성 안해도 됨
     }
 
     // 2. 책 목록보기
     public List<BookRespDto> 책목록보기(){
         return bookRepository.findAll().stream()
-                .map((bookPS)-> new BookRespDto().toDto(bookPS))
-//                .map(new BookRespDto()::toDto) // 메소드 참조
+//                .map((bookPS)-> bookPS.toDto())
+                .map(Book::toDto) // 메소드 참조
                 .collect(Collectors.toList());
     }
     // 3. 책 한건보기
     public BookRespDto 책한건보기(Long id){
         Optional<Book> bookOP = bookRepository.findById(id);
         if(bookOP.isPresent()){
-            return new BookRespDto().toDto(bookOP.get());
+            Book bookPS = bookOP.get();
+            return bookPS.toDto();
         }else{
             throw new RuntimeException("해당 아이디를 찾을 수 없습니다.");
         }
@@ -54,13 +55,15 @@ public class BookService {
     }
     // 5. 책 수정
     @Transactional(rollbackFor = RuntimeException.class) // controller 쪽에서 return 해줄 필요가 없음
-    public void 책수정하기(Long id,BookSaveReqDto dto){
+    public BookRespDto 책수정하기(Long id,BookSaveReqDto dto){
         Optional<Book> bookOP = bookRepository.findById(id);
         if(bookOP.isPresent()){
             Book bookPS = bookOP.get();
             bookPS.update(dto.getTitle(),dto.getAuthor());
+            return bookPS.toDto();
         }else{
             throw new RuntimeException("해당 아이디를 찾을 수 없습니다.");
         }
     } // 영속화된 context 내용을 변경하기만 하면 메서드 종료시에 더티체킹(flush)으로 update 됨
+
 }

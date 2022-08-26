@@ -1,5 +1,6 @@
 package site.metacoding.junitproject.web.dto;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import site.metacoding.junitproject.domain.Book;
@@ -11,10 +12,17 @@ public class BookRespDto {
     private String title;
     private String author;
 
-    public  BookRespDto toDto(Book bookPS) { // static을 붙이면 외부에서 객체를 만들지 않아도 됨
+ /*   public  BookRespDto toDto(Book bookPS) { // static을 붙이면 외부에서 객체를 만들지 않아도 됨
         this.id = bookPS.getId();
         this.title = bookPS.getTitle();
         this.author = bookPS.getAuthor();
         return this;
+    }*/
+
+    @Builder
+    public BookRespDto(Long id, String title, String author) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
     }
 }

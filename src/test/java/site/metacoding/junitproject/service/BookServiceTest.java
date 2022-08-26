@@ -19,6 +19,7 @@ import site.metacoding.junitproject.web.dto.BookSaveReqDto;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -75,8 +76,50 @@ public class BookServiceTest {
         List<BookRespDto> bookRespDtoList = bookService.책목록보기();
 
         //then (검증)
-        assertThat(bookRespDtoList.get(0).getTitle()).isEqualTo("junit강의");
+        assertThat(bookRespDtoList.get(0).getTitle()).isEqualTo("junit강의"); //앞쪽이 실제로 나올 코드, 뒤쪽이 내가 넣은 데이터 값
         assertThat(bookRespDtoList.get(0).getAuthor()).isEqualTo("메타코딩");
+        assertThat(bookRespDtoList.get(1).getTitle()).isEqualTo("spring강의");
+        assertThat(bookRespDtoList.get(1).getAuthor()).isEqualTo("겟인데어");
+
+    }
+
+    @Test
+    public void 책한건보기_test(){
+
+        //given
+        Long id = 1L;
+        Book book = new Book(1L,"junit강의","메타코딩");
+        Optional<Book> bookOP = Optional.of(book);
+        //stub
+        when(bookRepository.findById(id)).thenReturn(bookOP);
+
+        //when
+        BookRespDto bookRespDto = bookService.책한건보기(id);
+
+        //then
+        assertThat(bookRespDto.getTitle()).isEqualTo(book.getTitle());
+        assertThat(bookRespDto.getAuthor()).isEqualTo(book.getAuthor());
+    }
+
+    @Test
+    public void 책수정하기_test(){
+        //given
+        Long id = 1L;
+        BookSaveReqDto dto = new BookSaveReqDto();
+        dto.setTitle("spring강의"); // -> spring강의
+        dto.setAuthor("겟인데어"); // 겟인데어
+
+        //stub
+        Book book = new Book(1L,"junit강의","메타코딩");
+        Optional<Book> bookOP = Optional.of(book);
+        when(bookRepository.findById(id)).thenReturn(bookOP);
+
+        //when
+        BookRespDto bookRespDto = bookService.책수정하기(id, dto);
+
+        //then
+        assertThat(bookOP.get().getTitle()).isEqualTo(dto.getTitle());
+        assertThat(bookOP.get().getAuthor()).isEqualTo(dto.getAuthor());
 
     }
 }
