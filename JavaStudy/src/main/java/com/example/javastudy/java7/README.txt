@@ -41,7 +41,7 @@ but
 Pet pet=new Dog(); // 만약 pet이 Dog 인스턴스로 생성했다면
 pet instanceof Dog => true 가 될 수 있음!!
 
-추상 클래스 => absract class Animal(){}
+추상 클래스 => abstract class Animal(){}
 
 추상 메서드는 추상 클래스에서만 생성 가능, 비추상적 메서드는 추상 클래스에서 생성 가능
 

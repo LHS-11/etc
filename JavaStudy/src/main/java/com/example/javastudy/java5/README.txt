@@ -49,7 +49,7 @@ Wrapper Class => 추가적인 옵션을 다양하게 제공, 기본값에 객체
 
 valueOf => 존재하는 객체 중 같은 값을 가지는게 있는지 확인하고 있으면 참조값을 가르킴 (재사용)
 
-Java5 에서는 Auto Boxing을 통해 valueOf를 자동으로 실행
+Java5 에서는 Auto Boxing 을 통해 valueOf를 자동으로 실행
 
 SIZE (bit) , BYTES (byte)
 
