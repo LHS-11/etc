@@ -54,6 +54,7 @@ Collections.sort(객체 이름) => 정렬
 
 ArrayList.sort()
 
+--------------------------------------------------------------------
 Set 인터페이스 => 중복 X
 
 Set, HashSet 은 요소의 친구 상관 안함 (순서대로 저장 X, 정렬 X)
@@ -87,6 +88,7 @@ class StringLengthComparator implements Comparator<String>{
         return Integer.compare(o2.length(), o1.length());
     }
 }
+----------------------------------------------------------------------
 
 HashMap => key 값을 null 값과 저장 가능
 
