@@ -49,8 +49,5 @@ public class GenericsRunner {
         System.out.println(new TreeSet<>(Set.of(1,2,3,4)));
 
 
-
-
-
     }
 }
