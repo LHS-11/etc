@@ -38,15 +38,21 @@ public class GenericsRunner {
         myCustomList.addElement(2);
         int value= myCustomList.get(0);
 //        System.out.println("myCustomList.toString() = " + myCustomList.toString());
+        TreeSet treeSet = new TreeSet();
+        treeSet.add(1.0);
+        treeSet.add(2.0);
+        System.out.println(treeSet);
 
+        System.out.println(doubleValue(new ArrayList(List.of(1,1.0,2l))));
         System.out.println(doubleValue(new ArrayList(List.of(1, 2, 3))));
         System.out.println(doubleValue("123"));
         System.out.println(doubleValue(123));
         System.out.println(doubleValue(20L));
-        System.out.println(new LinkedList(List.of(15,2,2,51)));
-        System.out.println(new Vector(List.of(15,2,2,51)));
-        System.out.println(List.of(15,2,2,51));
-        System.out.println(new TreeSet<>(Set.of(1,2,3,4)));
+
+        List<Number> list1 = new ArrayList<>();
+        List<Long> list2 = new ArrayList<>();
+        addCoupleOfValues(list1);
+        System.out.println(list1);
 
 
     }

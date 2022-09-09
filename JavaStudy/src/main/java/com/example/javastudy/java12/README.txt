@@ -52,5 +52,5 @@ catch ( IOException | SQLException ex) {
 1. 예외를 숨기지 말자 => stack trace 의 전부를 log 에 넣음
 2. flow control 사용 X => if-else 사용 X
 3. 사용자를 생각하라 => 최종 사용자에게 어떻게 설명 할지를 생각하라
-4. calling 메서드에 대해 생각하라 => RuntimeException으로 만들 필요가 없는지 생각
+4. calling 메서드에 대해 생각하라 => RuntimeException 으로 만들 필요가 없는지 생각
 5. global exception handling => 모든 것을 관장하는 무언가를 설정 (사용자에게 예외가 직접 전달되는 일이 없도록) -> 예외에 대한 올바른 메시지가 출력되어야 함
