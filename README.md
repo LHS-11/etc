@@ -35,7 +35,7 @@ ex) 사람이 클래스면 객체는 클래스의 인스턴스
 
 
 
-
+           
 Integer => byte, short, int, long
 size =>       1,     2,   4,    8
 
