@@ -9,8 +9,8 @@ ex) long size=10000000l;
 
 형변환 => cast 함수
 ex) int size1;
-    long size = long size=10000000l;
-    int size1 = (int) size;
+    long size = 10000000l; 
+    int size1 = (int) size; -> 작은 값에 큰 값을 담기 때문에 casting (명시적 형변환이 필요)
 
 앞에 0을 붙이면 8진수 , 0x를 붙이면 16진수
 ex) int eight=010 => eight=8, int sixteen=0x8 => sixteen=16
@@ -26,7 +26,7 @@ ex) float f= 34.5f
 => 부동 소숫값이 표현되는 방식 때문에
 해결책 : BigDecimal 사용
 
-BigDecimal 객체는 한 번 만든 이상 값을 변경할 수 없음 => 새 변수만 생성해야함
+BigDecimal 객체는 한 번 만든 이상 값을 변경할 수 없음 (불변성) => 새 변수만 생성해야함
 BigDecimal 객체를 계산할 때는 double x , string o
 
 ex)
@@ -40,6 +40,6 @@ int j=15;
 j>15 && i++>5 =>  && 단축 회로 연산자 (수식 자체가 거짓이면 평가 자체를 하지 않음)
 => i,j는 변하지 않음
 
-j>15 && i++>5 => & 연산자 하나가 거짓임에도 다 실행
+j>15 & i++>5 => & 연산자 하나가 거짓임에도 다 실행
 => i=11,j=15
 
