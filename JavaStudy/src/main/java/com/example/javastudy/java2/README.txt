@@ -34,10 +34,11 @@ BigDecimal number = new BigDecimal("11.5")
 int i=5;
 number.add(new BigDecimal(i)) => 16.5
 
+&& 연산자와 & 연산자 차이
 ex)
 int i=10;
 int j=15;
-j>15 && i++>5 =>  && 단축 회로 연산자 (수식 자체가 거짓이면 평가 자체를 하지 않음)
+j>15 && i++>5 =>  && 수식 자체가 거짓이면 평가 자체를 하지 않음
 => i,j는 변하지 않음
 
 j>15 & i++>5 => & 연산자 하나가 거짓임에도 다 실행
