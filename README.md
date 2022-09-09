@@ -7,7 +7,8 @@
 절차나 메서드의 관점으로 생각</br>
 
 Class => **템플릿** (객체가 갖고 있는 데이터 + 객체에 행할 수 있는 동작)
-ex) 사람이 클래스면 객체는 클래스의 인스턴스</br>
+ex) 
+사람이 클래스면 객체는 클래스의 인스턴스</br>
 
 객체의 상태 = 필드 or 멤버 변수
 객체에서 호출할 수 있는 동작 = 메서드</br>
@@ -37,7 +38,8 @@ Integer => byte, short, int, long
 size =>       1,     2,   4,    8
 </br>
 리터럴의 경우 뒤에 l 을 붙여여함
-ex) long size=10000000l;</br>
+ex)
+long size=10000000l;</br>
 
 **작은 값을 큰 값에 담을 수는 있어도** (implicit 유형)
 
@@ -45,15 +47,15 @@ ex) long size=10000000l;</br>
 
 형변환 => cast 함수
 
-ex) int size1;
-
-    long size = 10000000l; 
-    
-    int size1 = (int) size; -> 작은 값에 큰 값을 담기 때문에 casting (명시적 형변환이 필요)</br>
+ex) 
+int size1;
+long size = 10000000l; 
+int size1 = (int) size; -> 작은 값에 큰 값을 담기 때문에 casting (명시적 형변환이 필요)</br>
 
 앞에 0을 붙이면 8진수 , 0x를 붙이면 16진수  
 
-ex) int eight=010 => eight=8, int sixteen=0x8 => sixteen=16</br>
+ex) 
+int eight=010 => eight=8, int sixteen=0x8 => sixteen=16</br>
 
 
 Floating Point (부동 소수점)
@@ -61,7 +63,8 @@ double, float</br>
 
 float => 부동 소수 리터럴 (정수 뒤에 f를 붙여야함)
 
-ex) float f= 34.5f</br>
+ex) 
+float f= 34.5f</br>
 
 부동 소수 데이터 유형은 정확하지 않음
 => 부동 소숫값이 표현되는 방식 때문에
@@ -72,21 +75,14 @@ BigDecimal 객체는 한 번 만든 이상 값을 변경할 수 없음 (**불변
 BigDecimal 객체를 계산할 때는 double x , string o
 
 ex)
-
 BigDecimal number = new BigDecimal("11.5")
-
 int i=5;
-
 number.add(new BigDecimal(i)) => 16.5</br></br>
 
 && 연산자와 & 연산자 차이
-
 ex)
-
 int i=10;
-
 int j=15;
-
 j>15 && i++>5 =>  && 수식 자체가 거짓이면 평가 자체를 하지 않음
 
 => i,j는 변하지 않음
