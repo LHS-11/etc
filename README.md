@@ -32,6 +32,10 @@ ex) 사람이 클래스면 객체는 클래스의 인스턴스
 디폴트 생성자에서 초기 상태 값을 주고 싶으면 this(speed) 이런식
 
 # Chapter 2
+
+
+
+
 Integer => byte, short, int, long
 size =>       1,     2,   4,    8
 
@@ -51,7 +55,7 @@ ex) int size1;
     
     int size1 = (int) size; -> 작은 값에 큰 값을 담기 때문에 casting (명시적 형변환이 필요)
 
-앞에 0을 붙이면 8진수 , 0x를 붙이면 16진수
+앞에 0을 붙이면 8진수 , 0x를 붙이면 16진수  
 
 ex) int eight=010 => eight=8, int sixteen=0x8 => sixteen=16
 
