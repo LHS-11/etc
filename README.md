@@ -48,8 +48,8 @@ long size=10000000l;</br>
 형변환 => cast 함수
 
 ex) 
-int size1;
-long size = 10000000l; 
+int size1;</br>
+long size = 10000000l; </br>
 int size1 = (int) size; -> 작은 값에 큰 값을 담기 때문에 casting (명시적 형변환이 필요)</br>
 
 앞에 0을 붙이면 8진수 , 0x를 붙이면 16진수  
