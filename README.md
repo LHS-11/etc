@@ -179,8 +179,14 @@ LocalTime - 시간만 보여줌</br></br>
 # Chapter 4
 **배열 선언**    
 ex)
+
+
 int[] marks={1,2,3};
+
+
 int[] marks=new int[3];
+
+
 
 Arrays.toString(marks) => 배열의 콘텐츠 출력
 Arrays.fill(marks,100) => 모두 100으로 채움
