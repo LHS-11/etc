@@ -654,40 +654,40 @@ Future<String> welcomeFuture
 
 ----------------------------------------------------------------------------------------
 # Chapter 10 - Exception
-**Exception Handling** ( 예외 처리 ) 2 가지 키
+**Exception Handling** ( 예외 처리 ) 2 가지 키</br>
 
-1. 제가 이용하려는 시스템의 최종 사용자에게 친절하게 메시지를 남기는 것 (어떤 작업 또는 단계를 거쳐야 하는지 알림)
-2. 오류를 제거하기 위한 충분한 정보를 제공
+1. 제가 이용하려는 시스템의 최종 사용자에게 친절하게 메시지를 남기는 것 (어떤 작업 또는 단계를 거쳐야 하는지 알림)</br>
+2. 오류를 제거하기 위한 충분한 정보를 제공</br></br>
 
-call chain
+call chain</br></br>
 
-try ~catch, throws
+try ~catch, throws</br></br>
 
-**예외에서 서열 존재**
-Exception > RuntimeException > NullPointException
+**예외에서 서열 존재**</br>
+Exception > RuntimeException > NullPointException</br></br>
 
-finally
-=> 예외가 생기든 안생기든 **finally 블럭 코드 실행** (무조건 절대적 return 값이 try 문에 있어도 실행됨)
-but System.exit 의 경우에는 실행 X
+finally</br>
+=> 예외가 생기든 안생기든 **finally 블럭 코드 실행** (무조건 절대적 return 값이 try 문에 있어도 실행됨)</br>
+but System.exit 의 경우에는 실행 X</br></br>
 
-**try 는 단독으로 쓰일 수 없다. (무조건 catch 나 finally 와 같이 쓰여야함)**
+**try 는 단독으로 쓰일 수 없다. (무조건 catch 나 finally 와 같이 쓰여야함)**</br></br>
 
-**점검 예외 처리 vs 비점검 예외 처리**
+**점검 예외 처리 vs 비점검 예외 처리**</br>
 
-class Error extends Throwable => **Error 는 프로그래머가 처리할 수 없는 오류** (메모리를 모두 사용한 경우, JVM 메모리, stack overflow 에러등)
-class Exception extends Throwable => **Exception 는 프로그래머가 처리 할 수 있는 오류**
+class Error extends Throwable => **Error 는 프로그래머가 처리할 수 없는 오류** (메모리를 모두 사용한 경우, JVM 메모리, stack overflow 에러등)</br>
+class Exception extends Throwable => **Exception 는 프로그래머가 처리 할 수 있는 오류**</br></br>
 
-Exception 항목 아래 **RuntimeException 이 아닌 것들이 checked exceptions** ( 처리하기 까다로운 것들)
-=> calling 메서드가 이를 처리하거나 또 다시 떠넘기는 방법 사용
-=> 예외를 처리해줘야함
-=> throws 를 앞에 붙여줘야함
+Exception 항목 아래 **RuntimeException 이 아닌 것들이 checked exceptions** ( 처리하기 까다로운 것들)</br>
+=> calling 메서드가 이를 처리하거나 또 다시 떠넘기는 방법 사용</br>
+=> 예외를 처리해줘야함</br>
+=> throws 를 앞에 붙여줘야함</br></br>
 
-**RuntimeException => unchecked exception** ( calling 메서드가 아무 처리 안해도 됨 => 예외를 밖으로 던지는 것을 걱정할 필요 없다)
+**RuntimeException => unchecked exception** ( calling 메서드가 아무 처리 안해도 됨 => 예외를 밖으로 던지는 것을 걱정할 필요 없다)</br></br>
 
-if) 소비자가 예외를 처리할 수 있다면 (예외가 생겼다는 것을 알리길 바란다면) **checked exception** => 사용자에게 압박을 줌
-소비자가 대응할 수 없는 일이라면 **RuntimeException 을 사용**
+if) 소비자가 예외를 처리할 수 있다면 (예외가 생겼다는 것을 알리길 바란다면) **checked exception** => 사용자에게 압박을 줌</br>
+소비자가 대응할 수 없는 일이라면 **RuntimeException 을 사용**</br>
 
-try-with-resources => try( ) 기능을 자료들에 사용 (구체적인 상황이라서 catch 나 finally 불필요 )
+try-with-resources => try( ) 기능을 자료들에 사용 (구체적인 상황이라서 catch 나 finally 불필요 )</br>
 ex)
 ```
  public class TryWithResourcesRunner {
@@ -702,16 +702,46 @@ ex)
     }
 
 ```
-두개 이상의 예외를 한번에 다룰 수도 있음
+두개 이상의 예외를 한번에 다룰 수도 있음</br>
 ```
 catch ( IOException | SQLException ex) {
  ex.printStackTrace();
 }
 ```
 
-예외를 다루는데 있어서 최고의 방법들
-1. 예외를 숨기지 말자 => stack trace 의 전부를 log 에 넣음
-2. flow control 사용 X => if-else 사용 X
-3. 사용자를 생각하라 => 최종 사용자에게 어떻게 설명 할지를 생각하라
-4. calling 메서드에 대해 생각하라 => RuntimeException 으로 만들 필요가 없는지 생각
-5. global exception handling => 모든 것을 관장하는 무언가를 설정 (사용자에게 예외가 직접 전달되는 일이 없도록) -> 예외에 대한 올바른 메시지가 출력되어야 함
+예외를 다루는데 있어서 최고의 방법들</br>
+1. 예외를 숨기지 말자 => stack trace 의 전부를 log 에 넣음</br>
+2. flow control 사용 X => if-else 사용 X</br>
+3. 사용자를 생각하라 => 최종 사용자에게 어떻게 설명 할지를 생각하라</br>
+4. calling 메서드에 대해 생각하라 => RuntimeException 으로 만들 필요가 없는지 생각</br>
+5. global exception handling => 모든 것을 관장하는 무언가를 설정 (사용자에게 예외가 직접 전달되는 일이 없도록) -> 예외에 대한 올바른 메시지가 출력되어야 함</br>
+
+# Chapter 11 - File
+**자바의 파일과 디렉토리**
+
+**파일들을 목록으로 정리하는 메서드**
+=> Files.list(경로)
+ex)
+```
+public class DirectoryScanRunner {
+       public static void main(String[] args) throws IOException {
+           Files.list(Paths.get(".")).forEach(System.out::println);
+       }
+   }
+```
+
+**전체 디렉토리를 가져오고 싶을 때 (재귀적인 방법)**
+=> Files.walk(경로)
+
+**원하는 파일을 찾는 메서드**
+=> Files.find(경로,깊이,람다식)
+파일의 attributes 들을 기준으로 필터링하여 디렉토리가 맞는지, 크기가 얼마만한지등 여러가지 알 수 있음
+파일의 이름이나 path, 파일의 특성에 따라 필터링 하는 것이 가능
+
+**파일에서 내용 불러오는 메서드**
+=> Files.readAllLines(경로)
+모든 줄의 내용을 리스트 형식으로 한번에 출력 but 큰 용량의 파일을 다룰 땐 좋은 방법이 아님
+So Files.lines(경로) => Stream 이용 (filter, map 같은 다양한 연산 사용 가능)
+
+**파일에 내용 담기**
+=> Files.write(경로,담을 내용)
