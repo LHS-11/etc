@@ -835,7 +835,30 @@ but public static final 은 가능하지 않다.**</br>
 내부 클래스들(nested classes) 은 다른 클래스 안에 들어가 있는 class 를 말함</br>
 전체 클래스의 선언이 다른 클래스 안에서 이루어짐</br>
 내부 클래스는 외부 클래스의 인스턴스가 필요 하지만 정적 중첩 클래스는 외부 클래스의 인스턴스가 필요 없다</br>
-but 내부 클래스는 외부 클래스의 멤버 변수에 접근 할 수 있지만, 정적 중첩 클래스는 불가능</br></br>
+but 내부 클래스는 외부 클래스의 멤버 변수에 접근 할 수 있지만, 정적 중첩 클래스는 불가능
+ex)
+```
+public class NestedClassRunner {
+
+    class InnerClass{
+
+    }
+
+    static class StaticNestedClass{
+
+    }
+
+    public static void main(String[] args) {
+
+        StaticNestedClass staticNestedClass = new StaticNestedClass();
+
+        NestedClassRunner nestedClassRunner = new NestedClassRunner();
+
+        InnerClass innerClass = nestedClassRunner.new InnerClass();
+
+    }
+}
+```
 
 #### 익명 클래스 => 다른 곳에서 사용되면 안됨. ( 이 논리가 여기에만 쓰인다는 것을 확신할 때 사용)
 ex)
