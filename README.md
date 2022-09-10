@@ -206,11 +206,11 @@ String[] string={"apple","banana","kiwi"}</br></br>
 
 Array(배열) 를 한번 만들면 크기 수정 안됨 </br>
 => 새로운 Array 만들어서 거기다 추가하거나 삭제 해야함 </br>
--> **ArrayList**를 사용하면 해결 가능</br></br>
+-> **ArrayList** 를 사용하면 해결 가능</br></br>
 
 ArrayList</br>
 String 타입의 ArrayList 를 생성시</br>
-=>** ArrayList<String> items=new ArrayList<String>()**;</br></br>
+=> **ArrayList<String> items=new ArrayList<String>();** </br></br>
 
 ArrayList 는 Collection 의 일부이기 때문에 Collection 메소드 사용 가능</br>
 ex) Collections.max(marks)</br></br>
