@@ -1,4 +1,4 @@
-# Chapter1 
+# Chapter 1 
 
 객체지향 프로그래밍 => 문제와 관련된 다양항 객체들을 중점적으로 보고 각자 가진 데이터가 무엇이며 해당 데이터가 할 수 있는 것은 무엇이 있을까?</br></br>
 
@@ -90,3 +90,82 @@ j>15 && i++>5 =>  && 수식 자체가 거짓이면 평가 자체를 하지 않�
 j>15 & i++>5 => & 연산자 하나가 거짓임에도 다 실행
 
 => i=11,j=15</br></br>
+
+# Chapter 3
+switch 문에서는 long, double, float type X
+=> char, int, byte, short, string, enum o</br>
+
+참조타입 (클래스) -> 참조변수 (인스턴스, 객체)</br>
+
+새로운 객체가 생성될 때마다 Heap에 저장 (가장 기본적인 저장소)</br>
+
+기본 변수들은 Stack에 저장</br>
+
+실제 객체 정보는 Heap에 저장 -> Stack에는 실제 객체가 저장된 메모리의 경로</br>
+
+String 클래스</br>
+length()</br>
+charAt()</br>
+substring()</br>
+indexOf() => 찾으려는 스트링의 첫 글자의 첫번째 인덱스를 출력</br>
+lastIndexOf() => 찾으려는 스트링의 첫 글자의 마지막번째 인덱스를 출력</br>
+contain() => 찾으려는 스트링이 있으면 true</br>
+startsWith() => 찾으려는 스트링이 맨 앞에 있으면 true</br>
+endsWith() => 찾으려는 스트링이 맨 뒤에 있으면 true</br>
+empty()</br>
+equals()</br>
+equalsIgnoreCase() => 대소문자 관계없이</br>
+concat() => 스트링을 다른 스트링에 연결</br>
+trim() => 빈칸을 없애줌</br>
+join() => 같은 스트링에서 값을 구분하고 싶을 때</br>
+replace() => 특정 문자를 특정 문자로 대체</br>
+
+String 클래스</br>
+모든 스트링 리터럴은 클래스 인스턴스</br>
+
+특정 클래스의 인스턴스가 되는 유일한 리터럴 타입</br>
+
+스트링은 특별한 타입 => 생성자 없이도 새로운 인스턴스를 생성 가능 // 자바에서 자동으로 객체 생성</br>
+
+스트링은 값 변경 불가능 => 새로운 변수 생성해서 바꿔야함 (불변성)</br>
+
+스트링 + 정수 => 스트링</br>
+ex) 1 + "123" -> "1123"
+
+----------------------------------------------------------------------------------------
+
+StringBuffer 의 경우 불변성이 없다. (값을 변경 가능)</br>
+=> 결합을 많이 수행해야 하는 경우 StringBuffer 사용 (메모리적으로 절약)</br>
+
+StringBuilder => 동기화된 클래스, 멀티 스레딩이 가능한 클래스</br>
+
+Wrapper Class => 추가적인 옵션을 다양하게 제공, 기본값에 객체를 제공</br>
+
+래퍼 클래스는 스태틱 메서드(생성자), valueOf를 톨해 생성</br>
+
+래퍼 클래스는 스트링 값을 넣을 수도 있음 but 불변성</br>
+
+valueOf => 존재하는 객체 중 같은 값을 가지는게 있는지 확인하고 있으면 참조값을 가르킴 (재사용)</br>
+
+Java5 에서는 Auto Boxing 을 통해 valueOf를 자동으로 실행</br>
+
+SIZE (bit) , BYTES (byte)</br>
+
+----------------------------------------------------------------------------------------
+
+LocalDate, LocalDateTime, LocalTime</br>
+
+LocalDate - 날짜만 보여줌</br>
+LocalDate today=LocalDate.now();</br>
+- getYear()
+- getDayOfWeek()
+- getDayOfMonth()
+- getDayOfYear()
+- isLeapYear() => 윤년 확인 가능
+- plusDays()
+- of() => 특정 연, 월, 일 설정 가능
+- WithYear (WithDayOfMonth, WithMonth, WithDayOfYear 등) 설정가능
+- isBefore, isAfter => 날짜 비교 가능
+
+LocalDateTime - 날짜와 시간을 모두 보여줌</br>
+LocalTime - 시간만 보여줌</br>
