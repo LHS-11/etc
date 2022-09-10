@@ -177,7 +177,7 @@ LocalDateTime - 날짜와 시간을 모두 보여줌</br>
 LocalTime - 시간만 보여줌</br></br>
 
 # Chapter 4
-**배열 선언**
+**배열 선언**    
 ex)
 int[] marks={1,2,3};
 int[] marks=new int[3];
