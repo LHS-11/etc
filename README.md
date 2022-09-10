@@ -310,7 +310,7 @@ public abstract class AbstractRecipe {
 => 인터페이스에 있는 메서드를 다 구현하고 싶지 않다면 추상 클래스를 통해 implements 해줘야 함</br></br>
 
 인터페이스 안에서 변수가 아닌 상수를 만들 수 있음 </br>
-(자동으로 public static final 이 붙음</br>
+(자동으로 public static final 이 붙음)</br>
 ex)</br>
 ```
 interface Runnable{
@@ -336,3 +336,134 @@ interface Runnable{
 인터페이스는 시행될 수 있는 공통된 행동들을 대표함</br></br>
 
 인터페이스 종류의 참조 변수는 인터페이스 구현을 가질 수 있음</br></br>
+
+# Chapter 6
+Collections</br>
+
+List<String> words = List.of("Apple","Bat","Banana"); => 한번에 리스트 구성 (하나씩 add 할 필요없이)</br></br>
+
+words.get(0) => "Apple"</br>
+
+words.contain("Bat") => true</br>
+
+words.indexOf("Banana") => 2</br>
+words.indexOf("A") => -1</br></br>
+
+불변성 => 특정 클래스의 인스턴스를 만든 순간부터 이 값을 변경 X</br>
+ex) String , BigDecimal, Wrapper, List</br></br>
+
+**List (불변성) <-> ArrayList, LinkedList, Vector (가변성)**</br>
+ex)
+```
+List<String> words = List.of("Apple","Bat","Banana") => 불변성 (List.of로 구성)
+List<String> words=new ArrayList<String>() => 가변성
+List<String> words=new LinkedList<String>()
+List<String> words=new Vector<String>()
+```
+
+배열의 경우 삽입과 삭제에 비효율 but **접근성은 좋음**</br>
+LinkedList 의 경우 **삽입과 삭제에 효과적** but 접근성은 비효율</br></br>
+
+Vector 는 **Thread Safe (Synchronized Methods)** => 성능 구림</br>
+**안전이 필요하지 않으면 ArrayList 쓰자**</br></br>
+
+ArrayList.add(index, n) => index 에 n 삽입</br>
+ArrayList.addAll()</br>
+ArrayList.set(index, n) => index 의 값을 n으로 변경</br>
+ArrayList.remove(index) => index 의 값을 제거</br>
+
+리스트 iterator 이용해서 출력
+ex)
+```
+Iterator wordsIterator=words.iterator();
+while(wordsIterator.hasNext()){
+    System.out.println(wordsIterator.next());
+}
+```
+
+특정 원소를 제거시
+ex) 
+  ```
+List<String> words=List.of("Apple","Cat","Bat");
+List<String> wordAl=new ArrayList<>(words);
+
+Iterator<String> iterator=wordsAl.iterator();
+while(iterator.hasNext()){
+    if(iterator.next().endsWith("at")){
+        iterator.remove();
+    }
+}
+wordAl=> [Apple]
+```
+
+List value=List.of("A",'A',1,1.0)</br>
+=> List 에서 type 에 상관없이 담을 수 있음 -> 특정한 type 만 담고 싶다면 Generation (일반화)</br></br>
+
+Collections.sort(객체 이름) => 정렬</br></br>
+
+ArrayList.sort()</br>
+
+--------------------------------------------------------------------
+Set 인터페이스 => 중복 X</br></br>
+
+**Set, HashSet** 은 요소의 친구 상관 안함 **(순서대로 저장 X, 정렬 X)**</br>
+<-> **LinkedHashSet 은 순서대로 저장**</br>
+<-> **TreeSet 은 정렬됨**</br></br>
+
+Set 특정 위치에 요소를 추가하거나 제거 X</br></br>
+
+Hashing 함수의 경우 13을 나눈 나머지 값을 index 로 가짐</br>
+=> 해시코드라는 것을 이용해 구현</br></br>
+
+Tree(red-black tree) => 검색, 제거, 삽입의 소모성을 줄여주는데 효과적</br>
+
+TreeSet.floor(n) => n보다 작거나 같은 것</br>
+TreeSet.lower(n) => n보다 작은 것</br>
+TreeSet.ceiling(n) => n보다 크거나 같은 것</br>
+TreeSet.subSet(a,b) => a보다 크거나 같고 b보단 작다</br>
+TreeSet.subSet(a,True,b,True) => a보다 크거나 같고 b보단 작거나 같다</br>
+TreeSet.headSet(n) => n 이전의 모든 숫자 출력</br>
+TreeSet.tailSet(n) => n 부터 모든 숫자 출력</br></br>
+
+queue</br>
+Queue.poll() => 맨 앞에 요소를 꺼내고 출력</br>
+Queue.offer() => 요소 추가</br>
+Queue.addAll(List.of()) => 여러 요소 추가</br></br>
+
+**Comparator 를 이용해서 커스텀 정렬 가능**</br>
+ex)
+```
+class StringLengthComparator implements Comparator<String>{
+
+    @Override
+    public int compare(String o1, String o2) {
+        return Integer.compare(o2.length(), o1.length());
+    }
+}
+```
+----------------------------------------------------------------------
+
+HashMap => key 값을 null 값과 저장 가능</br></br>
+
+**HashTable => 해싱함수 사용, 동기화 (스레드 안전 => 스레드가 작업을 하고 있으면 그 작업이 끝날 때까지 기다림 so 성능은 안좋음)**</br></br>
+
+HashMap, HashTable <-> LinkedHashMap <-> TreeMap</br></br>
+
+.of() => 이용해서 만들면 불변성을 지님 (추가 안됨)</br></br>
+
+Map.containsKey()</br>
+Map.containsValue()</br>
+Map.keySet()</br>
+Map.values()</br>
+
+TreeMap - NavigableMap</br>
+TreeMap.higherKey(n) => n보다 큰 key 값</br>
+TreeMap.lowerKey(n) => n보다 작은 key 값</br>
+
+TreeMap.ceilingKey(n) => n보다 같거나 큰 key 값</br>
+TreeMap.floorKey(n) => n보다 같거나 작은 key 값</br>
+
+TreeMap.firstEntry() => 처음 값</br>
+TreeMap.lastEntry() => 마지막 값</br>
+
+TreeMap.subMap(a,b) => a보다 같거나 크고, b보다 작은 key,value 값</br></br>
