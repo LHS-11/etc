@@ -326,8 +326,9 @@ class Student {
 }
 ```
 
-return 값 앞에 default 키워드를 붙이면 구현 가능</br>
-ex)</br>
+return 값 앞에 default 키워드를 붙이면 구현 가능 => adapter 패턴의 단점을 보완해줌 (이미 상속 중일 땐 adpater 패턴 적용 못하는 단점) </br>
+adapter 패턴 => 인터페이스의 강제성을 덜어줌 (필터링) </br>
+ex)
 ```
 interface Runnable{
 	default void run(){
