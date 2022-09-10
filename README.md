@@ -717,10 +717,10 @@ catch ( IOException | SQLException ex) {
 5. global exception handling => 모든 것을 관장하는 무언가를 설정 (사용자에게 예외가 직접 전달되는 일이 없도록) -> 예외에 대한 올바른 메시지가 출력되어야 함</br>
 
 # Chapter 11 - File
-**자바의 파일과 디렉토리**
+**자바의 파일과 디렉토리**</br></br>
 
-**파일들을 목록으로 정리하는 메서드**
-=> Files.list(경로)
+**파일들을 목록으로 정리하는 메서드**</br>
+=> Files.list(경로)</br>
 ex)
 ```
 public class DirectoryScanRunner {
@@ -730,18 +730,141 @@ public class DirectoryScanRunner {
    }
 ```
 
-**전체 디렉토리를 가져오고 싶을 때 (재귀적인 방법)**
-=> Files.walk(경로)
+**전체 디렉토리를 가져오고 싶을 때 (재귀적인 방법)**</br>
+=> Files.walk(경로)</br></br>
 
-**원하는 파일을 찾는 메서드**
-=> Files.find(경로,깊이,람다식)
-파일의 attributes 들을 기준으로 필터링하여 디렉토리가 맞는지, 크기가 얼마만한지등 여러가지 알 수 있음
-파일의 이름이나 path, 파일의 특성에 따라 필터링 하는 것이 가능
+**원하는 파일을 찾는 메서드**</br>
+=> Files.find(경로,깊이,람다식)</br>
+파일의 attributes 들을 기준으로 필터링하여 디렉토리가 맞는지, 크기가 얼마만한지등 여러가지 알 수 있음</br>
+파일의 이름이나 path, 파일의 특성에 따라 필터링 하는 것이 가능</br></br>
 
-**파일에서 내용 불러오는 메서드**
-=> Files.readAllLines(경로)
-모든 줄의 내용을 리스트 형식으로 한번에 출력 but 큰 용량의 파일을 다룰 땐 좋은 방법이 아님
-So Files.lines(경로) => Stream 이용 (filter, map 같은 다양한 연산 사용 가능)
+**파일에서 내용 불러오는 메서드**</br>
+=> Files.readAllLines(경로)</br>
+모든 줄의 내용을 리스트 형식으로 한번에 출력 but 큰 용량의 파일을 다룰 땐 좋은 방법이 아님</br>
+So Files.lines(경로) => Stream 이용 (filter, map 같은 다양한 연산 사용 가능)</br></br>
 
-**파일에 내용 담기**
-=> Files.write(경로,담을 내용)
+**파일에 내용 담기**</br>
+=> Files.write(경로,담을 내용)</br></br>
+
+# Chapter 12 - 원자성
+**동시 컬렉션의 동시성과 활용한 원자 연산**</br></br>
+
+concurrency</br></br>
+
+counter</br></br>
+
+automic operation</br></br>
+
+**thread-safety => 임의의 메소드가 다양한 thread 에 의해 한 번에 안전하게 실행되는 것**</br></br>
+
+**not thread-safe -> synchronized 를 붙이면 됨**</br>
+-> 문제점 : 적은 병행성을 가짐 ( 동기화(synchronized)된 메서드들이 여러개일 경우 각 메서드가 독립성을 가져도 여러 thread 들이 대기하는 상황이 생길 수 있음)</br>
+해결책 : **Lock** 를 사용시 코드를 synchronized 없이도 동기화해주거나 thread-safe 하게 해줌</br>
+( locks => 동기화된 코드를 여러 조각의 코드로 쪼갤 수 있게 해줌 )</br></br>
+
+**atomic class**</br>
+=> AtomicInteger</br>
+AtomicInteger 에 의존하여 thread-safe 한지를 확인하게 됨 ( locks 에 의무를 가져와서 AtomicInteger 에 부여)</br>
+아무곳이나 사용 X => 다양한 연산의 과정들이 필요할 경우 AtomicInteger 보단 lock 사용</br></br>
+
+**ConcurrentHashMap** => 해당 인터페이스에 computeIfAbsent() 메서드가 있는데 이 메서드가 atomic 연산을 보장해줌</br>
+so ConcurrentHashMap 을 불러내는 순간 thread-safe 에 해당</br>
+ConcurrentHashMap 은 지역을 나눠서 각 지역마다 다른 lock 를 사용해서 자원을 조금 더 효율적으로 사용 가능하게 함</br</br>></br>
+
+**CopyOnWrite**</br>
+=> write 가 매우 적고, read 가 매우 많은 경우에 효율적</br>
+=> 수정시 array 전체를 복사 (복사하는 동안 그 전의 array 를 이용함)</br>
+=> 동시성 (Concurrency) 확보</br></br>
+
+# Chapter 13 - java tip
+#### static imports
+ex)
+import static java.lang.System.out;
+=> System.out.println() -> out.println() 가능
+import static java.util.Collections.*;
+=> Collections.sort() -> sort() 가능
+
+#### block
+=> if 문에서만 사용되는 것이 아님, block 을 지정하고 그 안에 변수를 선언하면 그 block 안에서만 유효
+ex) {
+ int i;
+}
+
+#### equals
+=> 객체가 같을 때만 true, 안에 정보가 같다고 같은게 아님 (서로 다른 메모리에 위치)</br></br>
+
+#### hashcode
+=> hashcode 를 기준으로 bucket 에 배정</br>
+=> equals() 메서드를 실행할 때 hashCode() 메서드도 실행해야함</br></br>
+
+#### 클래스 접근 제어자
+public - 클래스가 public 에 해당한다면 다른 패키지의 클래스에서도 사용 가능</br>
+default - 클래스가 (default) 의 경우 해당 패키지 안에서만 사용 가능</br>
+protected, private 은 클래스에 사용 불가능</br></br>
+
+#### 메소드 접근 제어자
+public - 오로지 public 만 다른 패키지에서도 접근 가능</br>
+default - 같은 패키지이거나 자식 클래스(상속)에서 접근 가능</br>
+private - 같은 패키지 안에서 접근 불가능 (오로지 같은 클래스 안에서만 접근 가능)</br>
+protected - 같은 패키지이거나 해당 클래스에서만 접근 가능</br></br>
+
+#### final 클래스, final 메서드
+final 클래스 - 상속 불가능 (extends X), 특정 클래스에 대한 확장을 허용하고 싶지 않을 때 사용</br>
+final 메서드 - 코드 오버라이딩 불가능</br></br>
+
+#### final 변수, final 전달인자
+final 변수 - 불변성을 가짐 (값이 고정되길 원할 때), 단 한번만 값 부여 가능 (but, 생성자를 통해 인스턴스 마다 값을 달리 할 수 있다.)</br>
+final 전달인자 - final 을 이용해서 값을 받을 때 전달인자 수정 불가능</br></br>
+
+#### static 변수
+static 변수 - 다수의 인스턴스 사이에서 공유 가능 (각 인스턴스에 대해 별도의 인스턴스를 갖는 상황이 아닌 하나의 인스턴스만 갖길 원할 때)</br>
+ex) Player 클래스에서 인원수를 카운팅 할 때 static 이용하면 인스턴스를 생성할 때마다 카운팅이 됨</br></br>
+
+#### static 메서드
+=> 인스턴스 없이 클래스 이름에서 static 메서드 바로 사용 가능</br>
+
+static 메서드 안에서는 인스턴스 데이터에 접근 불가능 (static 인 데이터만 접근 가능)</br>
+<-> 반대는 가능</br></br>
+
+**public static final 변수 - 상수 (정의)**</br>
+=> 작업을 좀 더 분명하고 쉽게 전달</br>
+**public final 변수와 차이점 : 그저 final 만 선언한 변수의 경우 생성자를 통해서 인스턴스마다 값을 변경할 수 있다.</br>
+but public static final 은 가능하지 않다.**</br>
+
+#### 중첩 클래스 - 내부 클래스 vs 정적 중첩 클래스
+내부 클래스들(nested classes) 은 다른 클래스 안에 들어가 있는 class 를 말함</br>
+전체 클래스의 선언이 다른 클래스 안에서 이루어짐</br>
+내부 클래스는 외부 클래스의 인스턴스가 필요 하지만 정적 중첩 클래스는 외부 클래스의 인스턴스가 필요 없다</br>
+but 내부 클래스는 외부 클래스의 멤버 변수에 접근 할 수 있지만, 정적 중첩 클래스는 불가능</br></br>
+
+#### 익명 클래스 => 다른 곳에서 사용되면 안됨. ( 이 논리가 여기에만 쓰인다는 것을 확신할 때 사용)
+ex)
+```
+ Collections.sort(animals,
+                new Comparator<String>() { // 익명 클래스
+                    @Override
+                    public int compare(String o1, String o2) {
+                        return Integer.compare(o1.length(), o2.length());
+                    }
+                });
+```
+
+#### Enum (열거형) => 특정 값에 제한을 두기 위해서 사용
+열거형 , 인스턴스 변수에 저장 가능</br>
+ex)
+```
+public enum Season{
+    WINTER(4), SPRING(1),SUMMER(2), FALL(3);
+
+    private int value;
+    private Season(int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+}
+```
+
