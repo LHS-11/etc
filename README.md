@@ -469,7 +469,7 @@ TreeMap.lastEntry() => 마지막 값</br>
 TreeMap.subMap(a,b) => a보다 같거나 크고, b보다 작은 key,value 값</br></br>
 
 # Chapter 7
-특정 타입이 아닌 여러 타입을 받고 싶을때 Generics 이용</br>
+특정 타입이 아닌 여러 타입을 받고 싶을때 Generics 이용</br></br>
 클래스에 제네릭 생성</br>
 ex) 
 ```
