@@ -129,11 +129,11 @@ String 클래스</br>
 ex) String s="awdsa";</br>
 
 스트링은 값 변경 불가능 => 새로운 변수 생성해서 바꿔야함 (불변성)</br>
-ex) String str="abc";
-    str="xyz"
+ex) String str="abc";</br>
+    str="xyz"</br>
 의미 : 문자열 데이터는 Heap 영역 중에서 String constant pool 이라는 곳에서 메모리를 할당 받아 그 곳에 값을 저장하고</br>
-Stack 에서 str 은 바로 그 주소값을 참조함 str="xyz" 으로 바꾸게 되면 Heap에서 새로 메모리를 할당하고 Stack 에서 str 이</br> 
-그 참조값으로 변경이 됨
+Stack 에서 str 은 바로 그 주소값을 참조함 str="xyz" 으로 바꾸게 되면 Heap에서 "xyz"에 해당하는 새로 메모리를 할당하고</br>
+Stack 에서 str 이 그 참조값으로 변경이 됨
 
 스트링 + 정수 => 스트링</br>
 ex) 1 + "123" -> "1123"
