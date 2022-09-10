@@ -515,3 +515,58 @@ static void addCoupleOfValues(List<? super Number> list){
 
 }
 ```
+# Chapter 8 - 함수형 프로그래밍
+**함수형 프로그래밍**</br></br>
+
+stream().forEach(action) => 흐름의 각 요소마다 함수를 보냄</br>
+
+각 요소가 흐름되고 각 요소들에 대해 코드가 실행</br></br>
+
+filter(logic) => if문</br></br>
+
+reduce(초기값, (함수 정의))</br>
+ex)
+```
+ List<Integer> list = List.of(1, 2, 3, 4, 5);
+list.steam().reduce(0,(num1,num2) -> num1+num2);
+num1=0, num2=1
+-> num1=1, num2=2
+-> num1=3, num2=3
+-> num1=6, num2=4
+-> num1=10, num2=5
+-> num1=15
+
+```
+함수형 프로그래밍과 일반 절차적 프로그래밍의 차이점</br>
+=> 변수 변이를 피함</br></br>
+
+**element -> element %2==0** => 여기서 -> **람다 표현식**</br></br>
+
+- 중간 연산 : 또 다른 스트림</br>
+ex) filter, sorted, distinct, map</br></br>
+- 종단 연산 : 요소를 처리하고 소모 ( 스트림을 입력값으로 받아 하나의 결과로 줄이는 것)</br>
+무조건 하나 => 스트림이 모두 소모돼 하나의 결과로 줄여주기 때문에 하나일 수 밖에 없다</br>
+ex) 
+```
+forEach, reduce, max((num1,num2) -> Integer.compare(num1,num2))
+```
+
+IntStream=> Stream 이 아님 (IntPipeline)</br>
+(So, boxed()를 통해서 스트림의 정수형 배열로 변환)</br></br>
+
+Optional => isPresent(), orElse()</br></br>
+
+자바 컴파일러가 함수형 인터페이스 실행</br>
+- filter -> Predicate (test 메서드)  </br>
+- forEach -> Consumer (accept 메서드)  </br>
+- map -> Function (apply 메서드 )</br></br>
+
+메서드 참조 => 축약 가능 ( 코드의 가독성을 높이기 위함 )</br>
+클래스 이름 :: 메서드 이름</br>
+ex) 
+```
+filter(n -> n%2==0) => filter(클래스 이름::isEven)
+public static boolean isEven(Integer number){
+    return number%2==0;
+}
+```
