@@ -93,15 +93,15 @@ j>15 & i++>5 => & 연산자 하나가 거짓임에도 다 실행
 
 # Chapter 3
 switch 문에서는 long, double, float type X
-=> char, int, byte, short, string, enum o</br>
+=> char, int, byte, short, string, enum o</br></br>
 
-참조타입 (클래스) -> 참조변수 (인스턴스, 객체)</br>
+참조타입 (클래스) -> 참조변수 (인스턴스, 객체)</br></br>
 
-새로운 객체가 생성될 때마다 **Heap에 저장** (가장 기본적인 저장소)</br>
+새로운 객체가 생성될 때마다 **Heap에 저장** (가장 기본적인 저장소)</br></br>
 
-기본 변수들은 **Stack에 저장**</br>
+기본 변수들은 **Stack에 저장**</br></br>
 
-**실제 객체 정보는 Heap에 저장 -> Stack에는 실제 객체가 저장된 메모리의 경로**</br>
+**실제 객체 정보는 Heap에 저장 -> Stack에는 실제 객체가 저장된 메모리의 경로**</br></br>
 
 String 클래스</br>
 length()</br>
@@ -159,7 +159,7 @@ SIZE (bit) , BYTES (byte)</br></br>
 
 ----------------------------------------------------------------------------------------
 
-LocalDate, LocalDateTime, LocalTime</br>
+LocalDate, LocalDateTime, LocalTime class</br>
 
 LocalDate - 날짜만 보여줌</br>
 LocalDate today=LocalDate.now();</br>
