@@ -17,6 +17,7 @@ public class PrincipalDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
 
     // 시큐리티 session(내부 Authentication (내부 UserDetails))
+    // 함수 종료시 @AuthenticationPrincipal 어노테이션이 생성
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // html 에서 파라미터가 넘어올 때 username 이름이 동일해야 함 => 만약 바꾸고 싶으면 SecurityConfig 에서 usernameParameter 안에 바꿔줘야함

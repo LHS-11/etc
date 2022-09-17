@@ -10,3 +10,4 @@ Authentication
 1) UserDetails -> 일반적인 로그인
 2) Oauth2User -> OAuth 로그인 (구글, 네이버 등)
 => 위 두 개를 PrincipalDetails 타입으로 묶어버리면 그냥 PrincipalDetails 공통적으로 사용하면 됨
+

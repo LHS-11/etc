@@ -2,13 +2,13 @@ package com.cos.security1.config;
 
 import com.cos.security1.config.auth.ouath.PrincipalOauth2UserService;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 // 구글 로그인이 완료된 뒤의 후처리가 필요함. 1) 코드 받기(인증) 2) 엑세스 토큰(권한)
 // 3) 사용자 프로필 정보를 가져와서 4-1) 그 정보를 토대로 회원가입을 자동으로 진행시키기도 함
@@ -16,15 +16,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 @Configuration
-@AllArgsConstructor
+@RequiredArgsConstructor
 @EnableWebSecurity // 스프링 시큐리티 필터가 스프링 필터 체인에 등록이 됨
 @EnableGlobalMethodSecurity(securedEnabled = true,prePostEnabled = true) // Secured 어노테이션 활성화, preAuthorize, postAuthorize 활성화
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Bean // 해당 메서드로 리턴되는 IOC 로 등록해줌
-    public BCryptPasswordEncoder encoderPwd(){
-        return new BCryptPasswordEncoder();
-    } // 비밀번호 암호화
+//    @Bean // 해당 메서드로 리턴되는 IOC 로 등록해줌
+//    public BCryptPasswordEncoder encoderPwd(){
+//        return new BCryptPasswordEncoder();
+//    } // 비밀번호 암호화
 
     private final PrincipalOauth2UserService principalOauth2UserService;
 
