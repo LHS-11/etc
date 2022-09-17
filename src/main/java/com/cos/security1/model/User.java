@@ -20,8 +20,8 @@ public class User {
     private String password;
     private String email;
     private String role;
-    private String provider;
-    private String providerId;
+    private String provider; // google
+    private String providerId; // google 에서 받아본 primary key
 
 
     @CreationTimestamp
