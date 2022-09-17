@@ -1,5 +1,7 @@
 package com.cos.security1.config;
 
+import com.cos.security1.config.auth.ouath.PrincipalOauth2UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -8,7 +10,13 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+// 구글 로그인이 완료된 뒤의 후처리가 필요함. 1) 코드 받기(인증) 2) 엑세스 토큰(권한)
+// 3) 사용자 프로필 정보를 가져와서 4-1) 그 정보를 토대로 회원가입을 자동으로 진행시키기도 함
+// 4-2) (이메일, 전화번호, 이름, 아이디) 쇼핑몰 -> (집 주소), 백화점 몰 -> (vip 등급, 일반 등급)
+
+
 @Configuration
+@AllArgsConstructor
 @EnableWebSecurity // 스프링 시큐리티 필터가 스프링 필터 체인에 등록이 됨
 @EnableGlobalMethodSecurity(securedEnabled = true,prePostEnabled = true) // Secured 어노테이션 활성화, preAuthorize, postAuthorize 활성화
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -17,6 +25,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public BCryptPasswordEncoder encoderPwd(){
         return new BCryptPasswordEncoder();
     } // 비밀번호 암호화
+
+    private final PrincipalOauth2UserService principalOauth2UserService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -36,6 +46,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/")
                 .and()
                 .oauth2Login()
-                .loginPage("/loginForm"); // 구글 로그인이 완료된 뒤의 후처리가 필요함.
+                .loginPage("/loginForm") // tip. 코드 X (액세스 토큰 + 사용자 프로필 정보) / 액세스 토큰으로 사용자 프로필 정보를 받음
+                .userInfoEndpoint()
+                .userService(principalOauth2UserService);
+
     }
 }
