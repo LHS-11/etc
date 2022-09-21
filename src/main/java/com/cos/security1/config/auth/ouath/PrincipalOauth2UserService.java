@@ -1,6 +1,9 @@
 package com.cos.security1.config.auth.ouath;
 
 import com.cos.security1.config.auth.PrincipalDetails;
+import com.cos.security1.config.auth.ouath.provider.FacebookUserInfo;
+import com.cos.security1.config.auth.ouath.provider.GoogleUserInfo;
+import com.cos.security1.config.auth.ouath.provider.OAuth2UserInfo;
 import com.cos.security1.model.User;
 import com.cos.security1.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -33,11 +36,23 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         // userRequest 정보를 통해서 -> loadUser 함수 호출 -> 구글로부터 회원프로필 받아준다.
         System.out.println("getAttributes : "+oAuth2User.getAttributes());
 
-        String provider = userRequest.getClientRegistration().getClientId(); // google
-        String providerId = oAuth2User.getAttribute("sub");
+        OAuth2UserInfo oAuth2UserInfo=null;
+        if(userRequest.getClientRegistration().getRegistrationId().equals("google")){
+            System.out.println("구글 로그인 요청");
+            oAuth2UserInfo= new GoogleUserInfo(oAuth2User.getAttributes());
+        }else if(userRequest.getClientRegistration().getRegistrationId().equals("facebook")){
+            System.out.println("페이스북 로그인 요청");
+            oAuth2UserInfo= new FacebookUserInfo(oAuth2User.getAttributes());
+        }else{
+            System.out.println("저희는 구글,페북만 지원");
+        }
+
+
+        String provider = oAuth2UserInfo.getProvider(); // google
+        String providerId = oAuth2UserInfo.getProviderId();
         String username = provider+"_"+providerId; // google_sub
         String password = bCryptPasswordEncoder.encode("겟인데어");
-        String email = oAuth2User.getAttribute("email");
+        String email = oAuth2UserInfo.getEmail();
         String role = "ROLE_USER";
 
         User userEntity = userRepository.findByUsername(username);
@@ -52,6 +67,8 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
                     .providerId(providerId)
                     .build();
             userRepository.save(userEntity);
+        }else{
+            System.out.println("이미 회원가입 되어있습니다.");
         }
 
         // 회원가입을 강제로 진행해볼 예정

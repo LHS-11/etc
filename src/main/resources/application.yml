@@ -36,3 +36,19 @@ spring:
             scope:
               - email
               - profile
+
+          facebook:
+            client-id: 3221821591372128
+            client-secret: 3eeeb584acce22b235c966b74e09b066
+            scope:
+              - email
+              - public_profile
+
+          naver:
+            client-id: 3221821591372128
+            client-secret: 3eeeb584acce22b235c966b74e09b066
+            scope:
+              - name
+              - email
+            client-name: Naver
+            authorization-grant-type: authorization_code

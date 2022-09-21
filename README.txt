@@ -11,3 +11,7 @@ Authentication
 2) Oauth2User -> OAuth 로그인 (구글, 네이버 등)
 => 위 두 개를 PrincipalDetails 타입으로 묶어버리면 그냥 PrincipalDetails 공통적으로 사용하면 됨
 
+Provider => 구글, 페이스북, 트위터 등
+
+각 사이트들마다 getAttributes 로 넘겨주는 값이 다르기 때문에 Spring 에서 다 만들어놓을 수 없음
+
