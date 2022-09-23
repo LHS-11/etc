@@ -1,4 +1,3 @@
-
 ## AOP (Aspect - Oriented Programming)
 - AOP란? 
 => 여러 오브젝트에 나타나는 **공통적인 부가 기능**을 모듈화하여 재사용하는 기법
