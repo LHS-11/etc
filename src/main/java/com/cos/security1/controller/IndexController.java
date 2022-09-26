@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@Controller
+@Controller // 리턴시 View 로 반환 시켜줌
 @RequiredArgsConstructor
 public class IndexController {
 
