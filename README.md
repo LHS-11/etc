@@ -85,7 +85,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // spring sec
                 .defaultSuccessUrl("/") // 해당 페이지에서 로그인 요청시 로그인 성공시 해당 페이지로 이동
                 .and()
                 .oauth2Login()
-                .loginPage("/loginForm") // tip. 코드 X (액세스 토큰 + 사용자 프로필 정보) / 액세스 토큰으로 사용자 프로필 정보를 받음
+                .loginPage("/loginForm") // 구글 로그인이 완료된 후에 후처리가 필요함
                 .userInfoEndpoint()
                 .userService(principalOauth2UserService);
 
@@ -191,6 +191,7 @@ Security Session => Authentication
 -> UserDetails(PrincipalDetails) 을 Authenticated 에 넣고
 -> 시큐리티 세션에 Authenticated 을 넣음으로써 로그인 함
 
+SecuritySession(Authenticated(UserDetails(PrincipalDetails(유저 정보))))
 ```
 //시큐리티 설정에서 loginProcessingUrl("/login");
 // /login 요청이 오면 자동으로 UserDetailService 타입으로 IoC 되어 있는 loadUserByUsername 함수가 실행
@@ -220,7 +221,120 @@ public class PrincipalDetailsService implements UserDetailsService {
 
 ```
 
+글로벌로 권한 설정 할때
 
+```
+@Override
+    protected void configure(HttpSecurity http) throws Exception {
+
+        http.csrf().disable();
+
+        http.authorizeRequests()
+                .antMatchers("/user/**").authenticated() // authenticated => ROLE_ADMIN 역할 필요 , 인증만 되면 들어갈 수 있는 주소
+                //.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+                .antMatchers("/manager/**").access("hasRole('ROLE_ADMIN') and hasRole('ROLE_MANAGER')")
+                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+```
+
+
+@EnableGlobalMethodSecurity(securedEnabled = true)
+=> 특정 메서드에 간단하게 권한 설정 가능
+ex)
+```
+ @Secured("ROLE_ADMIN") // 권한 한개만 가질 때
+    @GetMapping("/info")
+    public @ResponseBody String info(){
+        return "개인정보";
+    }
+```
+
+@EnableGlobalMethodSecurity(securedEnabled = true,prePostEnabled = true)
+=> prePostEnabled = true 설정시 메서드에 여러 권한 설정 가능
+ex)
+```
+@PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')") // 여러 권한을 가지고 싶을때, 함수가 시작하기 전에 실행됨
+    @Secured("ROLE_ADMIN")
+    @GetMapping("/data")
+    public @ResponseBody String data(){
+        return "데이터정보";
+    }
+```
+
+구글로그인 완료시 코드를 돌려줌 -> 코드를 통해 엑세스 토큰 요청 -> 사용자 서버가 엑세스 토큰을 통해 민감한 개인정보에 접근 가능
+
+엑세스 토큰을 얻기 위해서는 코드가 필요한데 이 때 코드를 받을 수 있는 주소가 승인된 리다이렉션 URI
+
+만약 oauth2 라이브러리 사용시 => URI 고정 (http://localhost:8080/login/oauth2/code/google)
+login/oauth2/code/google 여기는 고정 그 전은 바꿔도 됨
+
+구글 로그인 링크 => /oauth2/authorization/google 링크 고정
+
+1. 코드 받기(인증) 
+2. 엑세스 토큰(권한) 
+3. 사용자 프로필 정보를 가져옴 
+4. 그 정보를 토대로 자동으로 회원가입을 진행시키기도 함 
+
+
+tip. 코드 X (액세스 토큰 + 사용자 프로필 정보) / 액세스 토큰으로 사용자 프로필 정보를 받음
+
+구글 로그인 후 후처리 되는 함수 loadUser 라는 메서드
+OAuth2UserRequest userRequest => 액세스토큰 + 사용자 프로필 정보가 들어있음
+필요한 정보들 대체로 super.loadUser(userRequest).getAttributes 여기에 들어있음
+ex)
+```
+@RequiredArgsConstructor
+@Service
+public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
+
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    private final UserRepository userRepository;
+
+    // 구글로 부터 받은 userRequest 데이터에 대한 후처리 되는 함수
+    @Override
+    public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+    System.out.println("getClientRegistration:"+userRequest.getClientRegistration()); // registrationId 로 어떤 Ouath로 로그인 했는지 확인 가능
+    System.out.println("getAccessToken:"+userRequest.getAccessToken());
+    // 구글 로그인 버튼 클릭 -> 구글 로그인 창 -> 로그인을 완료 -> code를 리턴(OAuth-client 라이브러리) -> AccessToken 요청
+    // userRequest 정보 -> loadUser 함수 호출 ->구글로부터 회원 프로필 받아줌
+    System.out.println("userRequest:"+super.loadUser(userRequest).getAttributes);
+    return super.loadUser(userRequest);   
+    }    
+```
+
+Authentication 객체가 가질 수 있는 2 가지 타입
+```angular2html
+@GetMapping("/test/login")
+    public @ResponseBody String testLogin(Authentication authentication,
+                                          @AuthenticationPrincipal PrincipalDetails userDetails){ // DI (의존성 주입)
+
+        // 1. authentication 객체로 접근을 하고 PrincipalDetails 로 다운캐스팅 해서 세션 정보를 얻을 수도 있음
+        // 2. @AuthenticationPrincipal 을 통해서 세션 정보를 얻을 수 있음
+
+        System.out.println("/test/login =====================");
+        PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
+        System.out.println("authentication = " + principalDetails.getUser()); // 1 번
+
+        System.out.println("userDetails = " + userDetails.getUser()); // 2 번
+        return "세션 정보 확인하기";
+    }
+
+```
+
+```angular2html
+ @GetMapping("/test/oauth/login")
+    public @ResponseBody String testOauthLogin(Authentication authentication,
+                                               @AuthenticationPrincipal OAuth2User oauth){ // DI (의존성 주입)
+        System.out.println("/test/oauth/login =====================");
+        OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal(); // PrincipalDetails 가 아닌 OAuth2User 로 다운캐스팅 해야함
+        System.out.println("authentication = " + oAuth2User.getAttributes()); // 1 번
+        System.out.println("oAuth2User = " + oauth.getAttributes());
+        return "OAuth 세션 정보 확인하기";
+    }
+```
+
+일반적으로 로그인 시 PrincipalDetails, OAuth 로 로그인 시 OAuth2User 
+----------------------------------------------------------------
 
 자기만의 시큐리티 세션 들고 있음
 
@@ -228,10 +342,12 @@ public class PrincipalDetailsService implements UserDetailsService {
 
 시큐리티 세션에서 들어올 수 있는 타입은 Authentication 객체 ( controller 에서 DI 가능)
 
-Authentication
+Authentication 에 밑에 두개가 주입됨
 1) UserDetails -> 일반적인 로그인
 2) Oauth2User -> OAuth 로그인 (구글, 네이버 등)
-   => 위 두 개를 PrincipalDetails 타입으로 묶어버리면 그냥 PrincipalDetails 공통적으로 사용하면 됨
+=> 위 두 개를 상속 ,PrincipalDetails 타입으로 묶어버리면 그냥 PrincipalDetails 공통적으로 사용하면 됨
+결국에 다형성을 이용해서 PrincipalDetails 를 Authentication 에 주입하면 둘다 사용 가능하다!!!!!!!!!!
+
 
 Provider => 구글, 페이스북, 트위터 등
 
