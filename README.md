@@ -349,7 +349,23 @@ Authentication 에 밑에 두개가 주입됨
 결국에 다형성을 이용해서 PrincipalDetails 를 Authentication 에 주입하면 둘다 사용 가능하다!!!!!!!!!!
 
 
-Provider => 구글, 페이스북, 트위터 등
+PrincipalOauth2UserService, PrincipalDetailsService
+=> loadUser, loadUserByUsername 메서드가 실행되고 리턴 값으로 @AuthenticationPrincipal 이 만들어짐
 
+ProviderId 값이 다 다르기 때문에 (Google 은 sub, Facebook id) 다형성을 이용!!
+OAuth2UserInfo 라는 인터페이스를 만들고, 그 인터페이스를 GoogleUserInfo, FacebookUserInfo, NaverUserInfo 가 상속한다
+
+OAuth2-Client 가 Provider 를 생성 해주는데 Provider => 구글, 페이스북, 트위터 등 정도만 지원   
 각 사이트들마다 getAttributes 로 넘겨주는 값이 다르기 때문에 Spring 에서 다 만들어놓을 수 없음
+=> so 네이버나 카카오는 없음, provider 를 따로 만들어줘야함 (네이버나 카카오 공식 문서에 있음)
+
+네이버는 회원정보를 json 으로 받는데 response라는 키값으로 네이버가 리턴해준다 
+ex)
+```
+response={
+    resultcode=00,
+    message=success,
+    response={id=171131346, email =dwada@naver.com, name=크리스폴}    
+}
+```
 

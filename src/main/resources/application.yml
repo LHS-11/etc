@@ -43,7 +43,7 @@ spring:
             scope:
             - email
             - public_profile
-
+# 구글이나 페이스북은 redirect-url 이 기본적으로 설정 되어 있음 => http://localhost:8080/login/oauth2/code/(google, facebook)
           naver:
             client-id: J7K0OiQTWz4UEUh9R6lc
             client-secret: HNs9irTnsw
