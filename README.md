@@ -1,5 +1,5 @@
-5. 프레임워크 vs 라이브러리 vs API
-6. Servlet vs Spring
+5. 프레임워크 vs 라이브러리 vs API - 9월 28일
+6. Servlet vs Spring - 9월 28일 
 7. Web server vs WAS
 8. Restful
 9. 인증과 인가
