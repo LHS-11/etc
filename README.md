@@ -10,6 +10,7 @@ spring.datasource.username: cos
 spring.datasource.password: cos1234
 ```
 이런식으로 해야 하는데
+
 application.yml 같은 경우
 ```
 spring:
@@ -22,7 +23,9 @@ spring:
 이런식으로 계층적 구조로 표현하기 더 편리하다.
 
 Mustache 의존성 등록시 기본적으로 설정됨
+
 머스테치 기본경로 => src/main/resources/
+
 뷰리졸버 설정 => templates (prefix), .mustache (suffix) 생략 가능
 
 
@@ -45,8 +48,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
 }
 ```
 
-Spring Security 로 설정시
-기본적으로 인증이 필요한 서버가 됨 => SecurityConfig 파일 설정시 login 권한 해제 가능
+Spring Security 로 설정시 기본적으로 인증이 필요한 서버가 됨 
+
+=> SecurityConfig 파일 설정시 login 권한 해제 가능
 
 @ResponseBody 사용시 뷰 리졸버 사용하지 않고 바로 http 의 body 에 문자 내용 출력 가능
 
@@ -185,10 +189,15 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
 ```
 
 Security Session => Authentication
+
 로그인 시
+
 -> 유저 정보 찾고
+
 -> 그 유저 정보를 UserDetails(PrincipalDetails) 에 넣고
+
 -> UserDetails(PrincipalDetails) 을 Authenticated 에 넣고
+
 -> 시큐리티 세션에 Authenticated 을 넣음으로써 로그인 함
 
 SecuritySession(Authenticated(UserDetails(PrincipalDetails(유저 정보))))
@@ -238,7 +247,9 @@ public class PrincipalDetailsService implements UserDetailsService {
 
 
 @EnableGlobalMethodSecurity(securedEnabled = true)
+
 => 특정 메서드에 간단하게 권한 설정 가능
+
 ex)
 ```
  @Secured("ROLE_ADMIN") // 권한 한개만 가질 때
@@ -249,7 +260,9 @@ ex)
 ```
 
 @EnableGlobalMethodSecurity(securedEnabled = true,prePostEnabled = true)
+
 => prePostEnabled = true 설정시 메서드에 여러 권한 설정 가능
+
 ex)
 ```
 @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')") // 여러 권한을 가지고 싶을때, 함수가 시작하기 전에 실행됨
@@ -278,7 +291,9 @@ login/oauth2/code/google 여기는 고정 그 전은 바꿔도 됨
 tip. 코드 X (액세스 토큰 + 사용자 프로필 정보) / 액세스 토큰으로 사용자 프로필 정보를 받음
 
 구글 로그인 후 후처리 되는 함수 loadUser 라는 메서드
+
 OAuth2UserRequest userRequest => 액세스토큰 + 사용자 프로필 정보가 들어있음
+
 필요한 정보들 대체로 super.loadUser(userRequest).getAttributes 여기에 들어있음
 ex)
 ```
@@ -303,7 +318,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 ```
 
 Authentication 객체가 가질 수 있는 2 가지 타입
-```angular2html
+```
 @GetMapping("/test/login")
     public @ResponseBody String testLogin(Authentication authentication,
                                           @AuthenticationPrincipal PrincipalDetails userDetails){ // DI (의존성 주입)
@@ -321,7 +336,7 @@ Authentication 객체가 가질 수 있는 2 가지 타입
 
 ```
 
-```angular2html
+```
  @GetMapping("/test/oauth/login")
     public @ResponseBody String testOauthLogin(Authentication authentication,
                                                @AuthenticationPrincipal OAuth2User oauth){ // DI (의존성 주입)
@@ -345,21 +360,28 @@ Authentication 객체가 가질 수 있는 2 가지 타입
 Authentication 에 밑에 두개가 주입됨
 1) UserDetails -> 일반적인 로그인
 2) Oauth2User -> OAuth 로그인 (구글, 네이버 등)
+
 => 위 두 개를 상속 ,PrincipalDetails 타입으로 묶어버리면 그냥 PrincipalDetails 공통적으로 사용하면 됨
+
 결국에 다형성을 이용해서 PrincipalDetails 를 Authentication 에 주입하면 둘다 사용 가능하다!!!!!!!!!!
 
 
 PrincipalOauth2UserService, PrincipalDetailsService
+
 => loadUser, loadUserByUsername 메서드가 실행되고 리턴 값으로 @AuthenticationPrincipal 이 만들어짐
 
 ProviderId 값이 다 다르기 때문에 (Google 은 sub, Facebook id) 다형성을 이용!!
+
 OAuth2UserInfo 라는 인터페이스를 만들고, 그 인터페이스를 GoogleUserInfo, FacebookUserInfo, NaverUserInfo 가 상속한다
 
 OAuth2-Client 가 Provider 를 생성 해주는데 Provider => 구글, 페이스북, 트위터 등 정도만 지원   
+
 각 사이트들마다 getAttributes 로 넘겨주는 값이 다르기 때문에 Spring 에서 다 만들어놓을 수 없음
+
 => so 네이버나 카카오는 없음, provider 를 따로 만들어줘야함 (네이버나 카카오 공식 문서에 있음)
 
 네이버는 회원정보를 json 으로 받는데 response라는 키값으로 네이버가 리턴해준다 
+
 ex)
 ```
 response={
@@ -368,4 +390,92 @@ response={
     response={id=171131346, email =dwada@naver.com, name=크리스폴}    
 }
 ```
+----------------------------------------------------------------------------
 
+JWT = JSON WEB TOKEN
+
+클라이언트가 서버에 최초 요청시 서버가 세션 ID를 만들어서 Header 에 담아서 보냄
+
+그럼 클라이언트는 쿠키에 세션 ID를 저장하고 다음 요청때 Header 에 세션 ID를 담아서 
+
+서버에 요청함, 서버는 그 세션 ID를 목록(세션이라는 저장소)에 있는지 확인하고 DB에 사용자 정보를 응답 받음
+
+세션 ID가 사라지는 3가지 경우
+
+1. 서버가 세션 ID 날리는 경우
+
+2. 사용 브라우저 종료!
+
+3. 특정 시간이 지나면 세션 ID 사라짐
+
+세션의 단점
+
+클라이언트 수가 많읗 때 여러 서버에 로드 밸런싱을 통해 부담을 나눔 => 공통된 세션 저장소를 사용해야 하는데 
+
+이때 DB로 그것을 대체할 경우 속도가 매우 느림 (풀스캔) => ( CPU -> RAM (전기적 접근 가능) -> HDD (원판모양으로 풀 스캔) )
+
+so, 전기적 접근이 일어나는 곳에 세션이 저장되어 있어야 I/O 가 일어나지 않고 접근이 빠름 => Redis 라는 서버 사용
+
+------------------------------------------------------------------------
+
+통신 : OSI 7 계층
+
+응용 계층               
+
+표현 계층 : 암호화, 압축                   
+
+세션 계층 : 인증 체크                      
+
+전송 계층 : TCP/UDP                      
+
+네트워크 계층 : IP (WAN)                   
+
+데이터 링크 계층 : IP 안에 몇호 (LAN)        
+
+물리 계층 : 광케이블     -> 데이터 전송 ->    
+
+TCP (신뢰성 O, 속도 느림) => 웹
+
+UDP (신뢰성 X, 속도 빠름) => 전화, 동영상 
+
+------------------------------------------------------------------------------
+- CIA
+  - C (Confidentiality) -> 기밀성
+  - I (Integrity)-> 무결성 (변경)
+  - A (Availability) -> 가용성
+
+
+- RSA
+  - 공개키 -> 개인키 (암호화)
+  - 개인키 -> 공개키 (전자 서명) 
+
+
+- B 공개키로 문서를 암호화 한 뒤 A의 개인키로 또 암호화
+
+=> A의 공개키로 열리면 인증 o -> B의 개인키로 열어서 문서 확인 
+
+-----------------------------------------------------------------
+
+- RFC 문서 
+    - 벨 연구소에서 쓰던 내부망이랑 다른 대학 간에 연결을 하기위해 점차 http 프로토콜이 생겨남 (RFC 버전이 계속 올라감)
+
+- JWT (RFC 7519) => xxxxx.yyyyy.zzzzz
+    - Header => 어떤 알고리즘을 사용해서 서명했는지
+    - Payload => 정보 
+    - Signature => 헤더 + 페이로드 + 개인키 (HMAC SHA256)
+
+HMAC - 시크릿 키를 포함한 암호화 방식
+
+SHA256 - 해쉬
+
+JSON 은 Base64Url 로 암호화
+
+클라이언트 (웹 브라우저)
+
+- 로컬 스토리지에 jwt 값 저장
+
+서버에서는 Base64Url 로 디코딩 한 후,
+
+헤더와 페이로드, 서버가 가지고 있는 Secret key 로 HMAC SHA256 를 이용해서 암호화 한 뒤
+
+시그니처와 비교를 해서 검증(인증)함
