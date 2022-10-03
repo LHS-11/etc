@@ -224,10 +224,13 @@ ArrayList 는 Collection 의 일부이기 때문에 Collection 메소드 사용 
 ex) Collections.max(marks)</br></br>
 
 toString() => 객체명 출력시 해시 값이 나오는데, toString 메서드가 있다면 그 객체의 값(정보)가 나옴</br>
-public String toString(){</br>
-    return</br>
-}</br><
+```
+public String toString(){
 
+    return
+    
+}
+```
 ----------------------------------------------------------------------------------------
 # Chapter 5
 class => 단순한 템플릿</br>
