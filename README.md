@@ -1,3 +1,10 @@
+```
+create user 'cos'@'%' identified by 'cos1234';
+GRANT ALL PRIVILEGES ON *.* TO 'cos'@'%';
+```
+database table 권한 설정 
+
+-------------------------------------------------------
 JWT = JSON WEB TOKEN
 
 클라이언트가 서버에 최초 요청시 서버가 세션 ID를 만들어서 Header 에 담아서 보냄
