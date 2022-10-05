@@ -17,7 +17,7 @@ public class FilterConfig {
         return bean;
     }
 
-    @Bean
+//    @Bean
     public FilterRegistrationBean<MyFilter2> filter2(){
         FilterRegistrationBean<MyFilter2> bean = new FilterRegistrationBean<>(new MyFilter2());
         bean.addUrlPatterns("/*");

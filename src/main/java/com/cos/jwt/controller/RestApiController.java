@@ -2,6 +2,7 @@ package com.cos.jwt.controller;
 
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -12,6 +13,10 @@ public class RestApiController {
         return "<h1>home</h1>";
     }
 
+    @PostMapping("home")
+    public String home1(){
+        return "<h1>home</h1>";
+    }
 
-    
+
 }
