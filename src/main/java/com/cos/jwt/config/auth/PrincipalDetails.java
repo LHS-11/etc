@@ -1,6 +1,7 @@
 package com.cos.jwt.config.auth;
 
 import com.cos.jwt.model.User;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -51,7 +52,13 @@ public class PrincipalDetails implements UserDetails {
     }
 
     @Override
-    public boolean isEnabled() {
-        return false;
+    public boolean isEnabled() { // 계정 활성화 여부 (true 로 해야 계정을 UserDetails 에 있는 계정을 사용 할 수 있음)
+        return true;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+
 }
