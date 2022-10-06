@@ -16,14 +16,16 @@ public class PrincipalDetails implements UserDetails {
         this.user = user;
     }
 
+//
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> authorities = new ArrayList<>();
         user.getRoleList().forEach(r->{
+            System.out.println("r = " + r);
             authorities.add(()->r);
         });
-
-        return null;
+         return authorities;
     }
 
     @Override

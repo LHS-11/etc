@@ -37,10 +37,25 @@ public class RestApiController {
     @PostMapping("join")
     public String join (@RequestBody User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRoles("ROLE_USER");
+        user.setRoles("ROLE_MANAGER");
+//                user.setRoles("MANAGER");
+
         userRepository.save(user);
         return "회원가입완료";
     }
 
+    @GetMapping("/api/v1/user")
+    public String user(){
+        return "user";
+    }
 
+    @GetMapping("/api/v1/manager")
+    public String manager(){
+        return "manager";
+    }
+
+    @GetMapping("/api/v1/admin")
+    public String admin(){
+        return "admin";
+    }
 }
