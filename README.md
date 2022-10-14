@@ -4,6 +4,14 @@ Java의 작동 방식
 
 **-> .java (소스코드) -> java compiler -> 바이트 코드 -> 자바 가상머신 (Java Virtual Machine) -> 바이트 코드 분석 -> 주기억 장치 (메모리)에 올려줌**
 
+주기억장치(메모리)를 관리하는 운영체제(OS)한테 JVM 이 메모리(Runtime Data Area) 를 할당 받아 
+
+**1. Class Area, 2. Stack Area, 3. Heap Area** 4. Native Method Stack Area, 5. PC Register 이 5개로 쪼개서 관리
+
+- Class Area : 클래스 파일의 바이트 코드가 로드 되는 곳 (메인 메서드에서 사용하는 클래스와 static 변수)
+- Stack Area : 지역 변수, 매개 변수 , 임시로 할당 됨 프로그램 실행이 끝나면 사라짐
+- Heap Area : new 명령어를 통해 생성된 인스턴스 변수, Heap Area에 보관되는 메모리는 메서드 호출이 끝나도 사라지지 않고 유지됨
+
 
 객체지향 프로그래밍 => 문제와 관련된 다양항 객체들을 중점적으로 보고 각자 가진 데이터가 무엇이며 해당 데이터가 할 수 있는 것은 무엇이 있을까?</br></br>
 
