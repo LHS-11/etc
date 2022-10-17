@@ -18,15 +18,16 @@ public class Course {
         transcripts.add(transcript);
     }
 
-    public Vector<Course> getCourses(){
-        Iterator<Transcript> iter = transcripts.iterator();
-        Vector<Course> courses = new Vector<>();
-        while (iter.hasNext()) {
-            Transcript tc = iter.next();
-            courses.add(tc.getCourse());
-        }
-        return courses;
 
+
+    public Vector<Student> getStudents(){
+        Iterator<Transcript> iter = transcripts.iterator();
+        Vector<Student> students = new Vector<Student>();
+        while(iter.hasNext()){
+            Transcript tc = iter.next();
+            students.add(tc.getStudent());
+        }
+        return students;
     }
 
     public String getName(){
