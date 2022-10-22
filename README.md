@@ -557,7 +557,7 @@ reduce(초기값, (함수 정의))</br>
 ex)
 ```
  List<Integer> list = List.of(1, 2, 3, 4, 5);
-list.steam().reduce(0,(num1,num2) -> num1+num2);
+list.stream().reduce(0,(num1,num2) -> num1+num2);
 num1=0, num2=1
 -> num1=1, num2=2
 -> num1=3, num2=3
