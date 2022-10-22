@@ -2,6 +2,7 @@ package chapter1.check4;
 
 import java.util.Vector;
 
+
 public class Student {
 
     private String name;
