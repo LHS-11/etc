@@ -5,7 +5,7 @@ public class Light {
     private State state;
 
     public Light(){
-        state = new Off();
+        state = Off.getInstance();
     }
 
     public void setState(State state){
