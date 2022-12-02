@@ -11,5 +11,6 @@ public class Application {
         // TODO 구현 진행
         InputView inputView = new InputView();
         inputView.selectFeature();
+        inputView.selectPairMatching();
     }
 }
