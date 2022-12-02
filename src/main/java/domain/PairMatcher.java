@@ -5,7 +5,7 @@ import java.util.List;
 
 public class PairMatcher {
 
-    public List<CrewPair> matchPairs(List<String> shuffledCrew) {
+    public static List<CrewPair> matchPairs(List<String> shuffledCrew) {
         List<CrewPair> pairGroup = new ArrayList<>();
         if (checkGroupSizeEven(shuffledCrew)) {
             matchPairsEvenSize(shuffledCrew, pairGroup);
@@ -33,7 +33,7 @@ public class PairMatcher {
         pairGroup.set(pairGroup.size() - 1, lastCrewPair);
     }
 
-    public boolean checkGroupSizeEven(List<String> group) {
+    public static boolean checkGroupSizeEven(List<String> group) {
         return group.size() % 2 == 0;
     }
 

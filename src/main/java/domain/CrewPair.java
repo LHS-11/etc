@@ -19,7 +19,7 @@ public class CrewPair {
         crewPairInfo.add(crew);
     }
 
-    public boolean isSameCrewPair(CrewPair crewPair){
-        return this.crewPairInfo.containsAll(crewPair.getCrewPairInfo());
-    }
+//    public boolean isSameCrewPair(CrewPair crewPair){
+//        return this.crewPairInfo.containsAll(crewPair.getCrewPairInfo());
+//    }
 }

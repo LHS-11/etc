@@ -13,4 +13,6 @@ public class InputValidator {
         return feature.equals("1") || feature.equals("2") || feature.equals("3") || feature.equals("Q");
     }
 
+
+
 }
