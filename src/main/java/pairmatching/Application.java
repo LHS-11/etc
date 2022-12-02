@@ -12,5 +12,6 @@ public class Application {
         InputView inputView = new InputView();
         inputView.selectFeature();
         inputView.selectPairMatching();
+        inputView.selectPairMatchingRetry();
     }
 }
