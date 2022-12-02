@@ -5,8 +5,8 @@ import java.util.List;
 
 public class PairMatcher {
 
-    public List<List<String>> matchPairs(List<String> shuffledCrew) {
-        List<List<String>> pairGroup = new ArrayList<>();
+    public List<CrewPair> matchPairs(List<String> shuffledCrew) {
+        List<CrewPair> pairGroup = new ArrayList<>();
         if (checkGroupSizeEven(shuffledCrew)) {
             matchPairsEvenSize(shuffledCrew, pairGroup);
         }
@@ -17,20 +17,20 @@ public class PairMatcher {
         return pairGroup;
     }
 
-    private static void matchPairsEvenSize(List<String> shuffledCrew, List<List<String>> pairGroup) {
+    private static void matchPairsEvenSize(List<String> shuffledCrew, List<CrewPair> pairGroup) {
         for (int i = 0; i < shuffledCrew.size(); i+=2) {
-            List<String> pair = new ArrayList<>();
+            CrewPair pair = new CrewPair();
             for (int j = i; j < i + 2; j++) {
-                pair.add(shuffledCrew.get(j));
+                pair.addCrew(shuffledCrew.get(j));
             }
             pairGroup.add(pair);
         }
     }
 
-    private static void matchLastCrew(List<String> shuffledCrew, List<List<String>> pairGroup) {
-        List<String> lastPair = pairGroup.get(pairGroup.size() - 1);
-        lastPair.add(shuffledCrew.get(shuffledCrew.size() - 1));
-        pairGroup.set(pairGroup.size() - 1, lastPair);
+    private static void matchLastCrew(List<String> shuffledCrew, List<CrewPair> pairGroup) {
+        CrewPair lastCrewPair = pairGroup.get(pairGroup.size() - 1);
+        lastCrewPair.addCrew(shuffledCrew.get(shuffledCrew.size() - 1));
+        pairGroup.set(pairGroup.size() - 1, lastCrewPair);
     }
 
     public boolean checkGroupSizeEven(List<String> group) {

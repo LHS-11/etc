@@ -8,16 +8,24 @@ public class CrewPairMatchingInfo {
     private Level level;
 
     private Mission mission;
-    private List<List<String>> pairMatchingInfo;
+    private List<CrewPair> crewPairs;
 
-    public CrewPairMatchingInfo(Course course, Level level, Mission mission, List<List<String>> pairMatchingInfo) {
+    public CrewPairMatchingInfo(Course course, Level level, Mission mission, List<CrewPair> crewPairs) {
         this.course = course;
         this.level = level;
         this.mission = mission;
-        this.pairMatchingInfo = pairMatchingInfo;
+        this.crewPairs = crewPairs;
     }
 
-    public List<List<String>> getPairMatchingInfo() {
-        return pairMatchingInfo;
+    public List<CrewPair> getCrewPairs() {
+        return crewPairs;
+    }
+
+    public boolean isSameLevel(CrewPairMatchingInfo other){
+        return other.level == this.level;
+    }
+
+    public boolean isSameCrewPair(List<CrewPair> other){
+        return other.containsAll(crewPairs);
     }
 }
