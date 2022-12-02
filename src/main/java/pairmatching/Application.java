@@ -1,11 +1,12 @@
 package pairmatching;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import domain.PairMatchingFileReader;
+import domain.*;
 import view.InputView;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

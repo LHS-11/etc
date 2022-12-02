@@ -14,4 +14,6 @@ public class CrewPairMatchingGroup {
     public void addCrewPairMatingInfo(CrewPairMatchingInfo crewPairMatchingInfo){
         crewPairMatchingInfos.add(crewPairMatchingInfo);
     }
+
+
 }

@@ -18,10 +18,10 @@ public class PairMatcher {
     }
 
     private static void matchPairsEvenSize(List<String> shuffledCrew, List<List<String>> pairGroup) {
-        for (int i = 0; i < shuffledCrew.size(); i++) {
+        for (int i = 0; i < shuffledCrew.size(); i+=2) {
             List<String> pair = new ArrayList<>();
             for (int j = i; j < i + 2; j++) {
-                pair.add(shuffledCrew.get(i));
+                pair.add(shuffledCrew.get(j));
             }
             pairGroup.add(pair);
         }

@@ -9,13 +9,17 @@ public enum Level {
     LEVEL2("레벨2",Arrays.asList("장바구니","결제","지하철노선도")),
     LEVEL3("레벨3", Collections.emptyList()),
     LEVEL4("레벨4",Arrays.asList("성능개선","배포")),
-    LEVEL5("레벨5",Collections.emptyList());
+    LEVEL5("레벨5",Collections.emptyList()),
+    EMPTY("없음",Collections.emptyList());
 
     private String name;
-    private List<String> mission;
+    private List<String> missions;
 
-    Level(String name,List<String> mission){
+    Level(String name,List<String> missions){
         this.name = name;
-        this.mission = mission;
+        this.missions = missions;
     }
+
+
+
 }
