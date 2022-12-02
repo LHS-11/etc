@@ -13,6 +13,9 @@ public class InputView {
         return Console.readLine();
     }
 
+    public void selectPairMatching(){
+        System.out.println("");
+    }
 
 
 }
