@@ -20,6 +20,16 @@ public enum Level {
         this.missions = missions;
     }
 
+    public static boolean isCorrectMission(String mission){
+        return Arrays.stream(Level.values())
+                .filter(level -> level.hasMission(mission))
+                .findAny()
+                .isPresent();
+    }
 
+    public boolean hasMission(String mission){
+        return missions.stream()
+                .anyMatch(m -> m.equals(mission));
+    }
 
 }
