@@ -658,6 +658,8 @@ ex) 성적이 입력되었을 때 최대 3개 목록, 최대 5개 목록, 최소
 
 => 공통 기능을 상위 클래스 및 인터페이스로 일반화하고 이를 활용해 ScoreRecord 를 구현하는 방식으로 설계
 
+![image](https://user-images.githubusercontent.com/77667212/205430045-1639e096-1654-4174-9a39-3c3bb91665a3.png)
+
 ### 옵저버 패턴의 컬레보레이션
 - Subject : ConcreteObserver 객체를 관리하는 요소, Observer 인터페이스를 참조해서 ConcreteObserver 를 관리하므로 ConcreteObserver 의 변화에 독립적
 - ConcreteSubject : 변경 관리 대상이 되는 데이터가 있는 클래스, 데이터 변경을 위한 메서드인 setState 가 있으며 setState 에서는 자신의 데이터인 subjectState 를 변경하고 Subject 의 notifyObservers 메서드를 호출해서 ConcreteObserver 객체에 변경을 통보함.
