@@ -1,11 +1,11 @@
-package chapter7.refactor;
+package chapter7.refactor1;
 
 public class Light {
 
     private State state;
 
     public Light(){
-        state = Off.getInstance();
+        state = new OFF();
     }
 
     public void setState(State state){
@@ -19,5 +19,6 @@ public class Light {
     public void off_button_pushed(){
         state.off_button_pushed(this);
     }
+
 
 }
