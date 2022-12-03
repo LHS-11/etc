@@ -1,6 +1,6 @@
 package chapter10.refactor;
 
-public class LaneDecorator extends RoadDecorator{
+public class LaneDecorator extends DisplayDecorator {
 
     public LaneDecorator(Display display) {
         super(display);
@@ -8,10 +8,9 @@ public class LaneDecorator extends RoadDecorator{
 
     public void draw(){
         super.draw();
-        drawLane();
     }
 
     public void drawLane(){
-        System.out.println("\t차선 표시");
+        System.out.print("\t 차선 표시");
     }
 }
