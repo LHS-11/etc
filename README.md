@@ -619,10 +619,10 @@ ex) 버튼 처음 눌렀을 때 램프 켜짐, 두 번 눌렀을 때 알람 동�
 
 ![image](https://user-images.githubusercontent.com/77667212/205427818-32a6e28c-c566-482f-be67-5530d544563a.png)
 ### 커맨드 패턴의 컬레보레이션
-- Command : 실행될 기능에 대한 인터페이스, 실행될 기능을 execute 메서드로 선언
-- ConcreteCommand : 실제로 실행되는 기능을 구현 (Command 인터페이시를 구현)
-- Invoker : 기능의 실행을 요청하는 호출자 클래스
-- Receiver : ConcreteCommand 에서 execute 메서드를 구현할 때 필요한 클래스 ( Concrete Command 의 기능을 실행하기 위해 사용하는 수신자 클래스 )
+- Command (Command) : 실행될 기능에 대한 인터페이스, 실행될 기능을 execute 메서드로 선언
+- ConcreteCommand (AlarmCommand, LampCommand) : 실제로 실행되는 기능을 구현 (Command 인터페이시를 구현)
+- Invoker (Button) : 기능의 실행을 요청하는 호출자 클래스
+- Receiver (Alarm, Lamp) : ConcreteCommand 에서 execute 메서드를 구현할 때 필요한 클래스 ( Concrete Command 의 기능을 실행하기 위해 사용하는 수신자 클래스 )
 
 ### 장점과 단점
 #### 장점
@@ -636,6 +636,11 @@ ex) 버튼 처음 눌렀을 때 램프 켜짐, 두 번 눌렀을 때 알람 동�
 # Chapter 9 옵서버 패턴
 ## 옵저버 패턴
 => 데이터의 변경이 발생했을 경우 상대 클래스나 객체에 의존하지 않으면서 데이터 변경을 통보하고자 할 때 유용한 패턴 
+
+옵저버 패턴은 통보 대상 객체 관리를 Subject 클래스와 Observer 인터페이스로 일반화한다. 그러면 데이터 변경을 통보하는 클래스는 ConcreteSubject 와 ConcreteObserver 에 대한 의존성 제거가 가능하다 
+
+결과적으로 옵서버패턴은 통보대상 클래스나 대상객체의 변경에도 ConcreteSubject 클래스를 수정없이 그대로 사용할 수 있도록 한다.
+
 
 ex) 탐색기 => 새로운 파일이 추가되거나 삭제되었을 때 탐색기는 바로 update 해야함
 
@@ -658,7 +663,7 @@ ex) 성적이 입력되었을 때 최대 3개 목록, 최대 5개 목록, 최소
 - ConcreteSubject : 변경 관리 대상이 되는 데이터가 있는 클래스, 데이터 변경을 위한 메서드인 setState 가 있으며 setState 에서는 자신의 데이터인 subjectState 를 변경하고 Subject 의 notifyObservers 메서드를 호출해서 ConcreteObserver 객체에 변경을 통보함.
 - Observer : 데이터의 변경을 통보 받는 인터페이스, Subject 에서는 Observer 인터페이스의 update 메서드를 호출함으로써 ConcreteSubject 의 데이터 변경을 ConcreteObserver 에게 통보함
 - ConcreteObserver : ConcreteSubject 의 변경을 통보받는 클래스, Observer 인터페이스의 update 메서드를 구현함으로써 변경을 통보, 변경된 데이터는 ConcreteSubject 의 getState 메서드를 호출함으로써 변경을 조회
-
+-----------------------------------------------------------------------------------------------------------
 # Chapter 10 데커레이터 패턴
 ## 데커레이터 패턴
 => 기본 기능에 추가할 수 있는 기능의 종류가 많은 경우에 각 추가 기능을 Decorator 클래스로 정의한 후 필요한 Decorator 객체를 조합함으로써 

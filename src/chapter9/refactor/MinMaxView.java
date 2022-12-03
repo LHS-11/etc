@@ -5,13 +5,13 @@ import java.util.Collections;
 import java.util.List;
 
 public class MinMaxView implements Observer{
+
     private ScoreRecord scoreRecord;
 
     public MinMaxView(ScoreRecord scoreRecord){
         this.scoreRecord = scoreRecord;
     }
 
-    @Override
     public void update(){
         List<Integer> record = scoreRecord.getScores();
         displayMinMax(record);

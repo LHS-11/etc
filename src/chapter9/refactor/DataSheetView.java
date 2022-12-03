@@ -3,17 +3,17 @@ package chapter9.refactor;
 
 import java.util.List;
 
-public class DataSheetView implements Observer{
+public class DataSheetView implements Observer {
+
     private ScoreRecord scoreRecord;
     private int viewCount;
 
-    public DataSheetView(ScoreRecord scoreRecord,int viewCount){
+
+    public DataSheetView(ScoreRecord scoreRecord, int viewCount){
         this.scoreRecord = scoreRecord;
         this.viewCount = viewCount;
     }
 
-
-    @Override
     public void update() {
         List<Integer> record = scoreRecord.getScores();
         displayScores(record, viewCount);
@@ -26,4 +26,6 @@ public class DataSheetView implements Observer{
         }
         System.out.println();
     }
+
+
 }

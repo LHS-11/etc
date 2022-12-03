@@ -1,6 +1,6 @@
 package chapter9.practice;
 
-public class Battery extends Subject{
+public class Battery extends Subject {
 
     private int level=100;
 
