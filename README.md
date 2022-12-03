@@ -680,6 +680,8 @@ ex) 기본 도로 표시에 차선 표시 기능과 교통량 표시 기능 추�
 ### 해결책 
 => 각 추가 기능별로 개별적인 클래스를 설계하고 기능을 조합할 때 각 클래스의 객체 조합을 이용하면 됨
 
+![image](https://user-images.githubusercontent.com/77667212/205431554-10b236f9-b3db-4b5b-a768-089ffa9367b8.png)
+
 ### 데커레이터 패턴의 컬래보레이션
 - Component : 기본 기능을 뜻하는 ConcreteComponent 와 추가 기능을 뜻하는 Decorator 의 공통 기능을 정의
 - ConcreteComponent : 기본 기능을 구현하는 클래스
