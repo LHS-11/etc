@@ -1,6 +1,4 @@
-package chapter12;
-
-import chapter12.refactor.Direction;
+package chapter12.refactor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,19 +6,22 @@ import java.util.List;
 public class ElevatorManager {
 
     private List<ElevatorController> controllers;
-    private ThroughputScheduler scheduler;
+    private SchedulingStrategyID strategyID;
 
-    public ElevatorManager(int controllerCount){
+    public ElevatorManager(int controllerCount,SchedulingStrategyID strategyID){
         controllers = new ArrayList<>();
         for (int i = 0; i < controllerCount; i++) {
             ElevatorController controller = new ElevatorController(i);
             controllers.add(controller);
         }
-        scheduler = new ThroughputScheduler();
+        this.strategyID = strategyID;
     }
 
     void requestElevator(int destination, Direction direction){
-        int selectElevator = scheduler.selectElevator(this, destination, direction);
+
+        ElevatorScheduler scheduler = SchedulerFactory.getScheduler(strategyID);
+        System.out.println(scheduler);
+        int selectElevator= scheduler.selectElevator(this, destination, direction);
         controllers.get(selectElevator).gotoFloor(destination);
     }
 }

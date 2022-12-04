@@ -1,4 +1,4 @@
-package chapter12;
+package chapter12.refactor;
 
 public class ResponseTimeScheduler implements ElevatorScheduler{
     @Override

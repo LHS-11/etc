@@ -1,20 +1,10 @@
 package chapter12;
 
-public class ThroughputScheduler implements ElevatorScheduler {
+import chapter12.refactor.Direction;
 
-    private static ElevatorScheduler scheduler;
+public class ThroughputScheduler {
 
-    public static ElevatorScheduler  getInstance(){
-        if(scheduler==null){
-            scheduler = new ThroughputScheduler();
-        }
-        return scheduler;
-    }
-
-
-
-    public int selectElevator(ElevatorManager elevatorManager, int destination, Direction direction) {
-
+    public int selectElevator(ElevatorManager manager, int destination, Direction direction){
         return 0;
     }
 }
