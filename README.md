@@ -627,7 +627,6 @@ ex) 버튼 처음 눌렀을 때 램프 켜짐, 두 번 눌렀을 때 알람 동�
 - ConcreteCommand (AlarmCommand, LampCommand) : 실제로 실행되는 기능을 구현 (Command 인터페이시를 구현)
 
 - Invoker (Button) : 기능의 실행을 요청하는 호출자 클래스
--
 - Receiver (Alarm, Lamp) : ConcreteCommand 에서 execute 메서드를 구현할 때 필요한 클래스 ( Concrete Command 의 기능을 실행하기 위해 사용하는 수신자 클래스 )
 
 ### 장점과 단점
@@ -667,10 +666,10 @@ ex) 성적이 입력되었을 때 최대 3개 목록, 최대 5개 목록, 최소
 
 ### 옵저버 패턴의 컬레보레이션
 ![image](https://user-images.githubusercontent.com/77667212/205430045-1639e096-1654-4174-9a39-3c3bb91665a3.png)
-- Subject : ConcreteObserver 객체를 관리하는 요소, Observer 인터페이스를 참조해서 ConcreteObserver 를 관리하므로 ConcreteObserver 의 변화에 독립적
-- ConcreteSubject : 변경 관리 대상이 되는 데이터가 있는 클래스, 데이터 변경을 위한 메서드인 setState 가 있으며 setState 에서는 자신의 데이터인 subjectState 를 변경하고 Subject 의 notifyObservers 메서드를 호출해서 ConcreteObserver 객체에 변경을 통보함.
-- Observer : 데이터의 변경을 통보 받는 인터페이스, Subject 에서는 Observer 인터페이스의 update 메서드를 호출함으로써 ConcreteSubject 의 데이터 변경을 ConcreteObserver 에게 통보함
-- ConcreteObserver : ConcreteSubject 의 변경을 통보받는 클래스, Observer 인터페이스의 update 메서드를 구현함으로써 변경을 통보, 변경된 데이터는 ConcreteSubject 의 getState 메서드를 호출함으로써 변경을 조회
+- Subject (Subject): ConcreteObserver 객체를 관리하는 요소, Observer 인터페이스를 참조해서 ConcreteObserver 를 관리하므로 ConcreteObserver 의 변화에 독립적
+- ConcreteSubject (ScoreRecord): 변경 관리 대상이 되는 데이터가 있는 클래스, 데이터 변경을 위한 메서드인 setState 가 있으며 setState 에서는 자신의 데이터인 subjectState 를 변경하고 Subject 의 notifyObservers 메서드를 호출해서 ConcreteObserver 객체에 변경을 통보함.
+- Observer (Observer): 데이터의 변경을 통보 받는 인터페이스, Subject 에서는 Observer 인터페이스의 update 메서드를 호출함으로써 ConcreteSubject 의 데이터 변경을 ConcreteObserver 에게 통보함
+- ConcreteObserver (DataSheetView,MinMaxView): ConcreteSubject 의 변경을 통보받는 클래스, Observer 인터페이스의 update 메서드를 구현함으로써 변경을 통보, 변경된 데이터는 ConcreteSubject 의 getState 메서드를 호출함으로써 변경을 조회
 -----------------------------------------------------------------------------------------------------------
 # Chapter 10 데커레이터 패턴
 ## 데커레이터 패턴
@@ -688,10 +687,10 @@ ex) 기본 도로 표시에 차선 표시 기능과 교통량 표시 기능 추�
 
 ### 데커레이터 패턴의 컬래보레이션
 ![image](https://user-images.githubusercontent.com/77667212/205431554-10b236f9-b3db-4b5b-a768-089ffa9367b8.png)
-- Component : 기본 기능을 뜻하는 ConcreteComponent 와 추가 기능을 뜻하는 Decorator 의 공통 기능을 정의
-- ConcreteComponent : 기본 기능을 구현하는 클래스
-- Decorator : 많은 수가 존재하는 구체적인 Decorator 의 공통 기능을 제공
-- ConcreteDecorator : Decorator 의 하위 클래스로 기본 기능에 추가 되는 개별적인 기능을 뜻함
+- Component (Display) : 기본 기능을 뜻하는 ConcreteComponent 와 추가 기능을 뜻하는 Decorator 의 공통 기능을 정의
+- ConcreteComponent (RoadDisplay) : 기본 기능을 구현하는 클래스
+- Decorator (DisplayDecorator) : 많은 수가 존재하는 구체적인 Decorator 의 공통 기능을 제공
+- ConcreteDecorator (LaneDecorator, TrafficDecorator, CrossingDecorator) : Decorator 의 하위 클래스로 기본 기능에 추가 되는 개별적인 기능을 뜻함
 --------------------------------------------------------------------------------------
 # Chapter 11 템플릿 메서드 패턴
 ## 템플릿 매서드 패턴
@@ -708,8 +707,8 @@ ex) 기본 도로 표시에 차선 표시 기능과 교통량 표시 기능 추�
 
 ### 템플릿 메서드 패턴의 컬레보레이션
 ![image](https://user-images.githubusercontent.com/77667212/205478670-52d26e04-6e7f-42b0-b0ec-6d2063032309.png)
-- AbstractClass : 템플릿 메서드를 정의하는 클래스, 하위 클래스에 공통 알고리즘을 정의하고 하위 클래스에서 구현될 기능을 primitive 메서드 또는 hook 메서드로 정의하는 클래스
-- ConcreteClass : 물려받은 primitive 메서드 또는 hook 메서드를 구현하는 클래스, 상위 클래스에 구현된 템플릿 메서드의 일반적인 알고리즘에서 하위 클래스에 적합하게  primitive 메서드 또는 hook 메서드를 오버라이드 하는 클래스
+- AbstractClass (Motor) : 템플릿 메서드를 정의하는 클래스, 하위 클래스에 공통 알고리즘을 정의하고 하위 클래스에서 구현될 기능을 primitive 메서드 또는 hook 메서드로 정의하는 클래스
+- ConcreteClass (HyundaiMotor, LGMotor) : 물려받은 primitive 메서드 또는 hook 메서드를 구현하는 클래스, 상위 클래스에 구현된 템플릿 메서드의 일반적인 알고리즘에서 하위 클래스에 적합하게  primitive 메서드 또는 hook 메서드를 오버라이드 하는 클래스
 --------------------------------------------------------------------------------------
 
 # Chapter 12 팩토리 메서드 패턴
@@ -729,7 +728,10 @@ ex) 오전에는 대기시간 최소화 전략을 사용하고 오후에는 처�
 
 ### 팩토리 메서드 패턴 컬레보레이션
 ![image](https://user-images.githubusercontent.com/77667212/205480065-41a24814-8512-4765-9ac3-ae1a5b2a3a0e.png)
-
+- Product (ElevatorScheduler) : 팩토리 메서드로 생성될 객체의 공통 인터페이스
+- ConcreteProduct (ThroughputScheduler,ResponseTimeScheduler) : 구체적으로 객체가 생성되는 클래스
+- Creator (ElevatorManager) : 팩토리 메서드를 갖는 클래스
+- ConcreteCreator(EMWithThroughputScheduling, EMWithResponseTimeScheduling, EMWithDynamicScheduling) : 팩토리 메서드를 구현하는 클래스로 ConcreteProduct 객체를 생성
 
 ### 해결책
 객체 생성 코드를 별도의 클래스/메서드로 분리해 이용한다면 이 클래스/메서드만 변경함으로써 객체 생성 방식의 변화에 효과적으로 대응
@@ -749,8 +751,8 @@ ex) 오전에는 대기시간 최소화 전략을 사용하고 오후에는 처�
 
 ### 컴퍼지트 컬레보레이션
 ![image](https://user-images.githubusercontent.com/77667212/205483941-902e3fca-5827-4bfa-bd71-60770f7c7693.png)
-- Component : 구체적인 부분, 즉 Leaf 클래스와 전체에 해당하는 Composite 클래스에 공통 인터페이스를 정의
-- Leaf : 구체적인 부분 클래스로 Composite 객체의 부품으로 설정
-- Composite : 전체 클래스로 복수 개의 Component 를 갖도록 정의, 복수 개의 Leaf, 심지어 복수 개의 Composite 객체를 부분으로 가질 수 있음.
+- Component (ComputerDevice) : 구체적인 부분, 즉 Leaf 클래스와 전체에 해당하는 Composite 클래스에 공통 인터페이스를 정의
+- Leaf (Speaker,Keyboard,Mouse) : 구체적인 부분 클래스로 Composite 객체의 부품으로 설정
+- Composite (Computer) : 전체 클래스로 복수 개의 Component 를 갖도록 정의, 복수 개의 Leaf, 심지어 복수 개의 Composite 객체를 부분으로 가질 수 있음.
 
 
