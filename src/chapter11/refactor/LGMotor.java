@@ -11,7 +11,7 @@ public class LGMotor extends Motor{
     }
 
     @Override
-    public void moveMotor(Direction direction) {
+    protected void moveMotor(Direction direction) {
 
     }
 

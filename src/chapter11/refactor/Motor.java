@@ -37,7 +37,7 @@ public abstract class Motor {
         setMotorStatus(MotorStatus.MOVING);
     }
 
-    public abstract void moveMotor(Direction direction); // Primitive 메서드, hook 메서드
+    protected abstract void moveMotor(Direction direction); // Primitive 메서드, hook 메서드
 
 
 }
