@@ -2,27 +2,31 @@ package chapter14.refactor;
 
 import java.util.List;
 
-public class Computer {
+public class Computer extends ComputerDevice{
 
-    private List<ComputerDevice> computerDeviceList;
+    private List<ComputerDevice> computerDevices;
 
-    public void addComputerDevice(ComputerDevice computerDevice){
-        computerDeviceList.add(computerDevice);
+    public void addComputerDevices(ComputerDevice computerDevice){
+        computerDevices.add(computerDevice);
+    }
+
+    public void removeComputerDevices(ComputerDevice computerDevice){
+        computerDevices.remove(computerDevice);
     }
 
     public int getPrice(){
-        int price=0;
-        for (ComputerDevice computerDevice : computerDeviceList) {
-            price += computerDevice.getPrice();
+        int sum=0;
+        for (ComputerDevice computerDevice : computerDevices) {
+            sum += computerDevice.getPrice();
         }
-        return price;
+        return sum;
     }
 
     public int getPower(){
-        int power=0;
-        for(ComputerDevice computerDevice: computerDeviceList){
-            power += computerDevice.getPower();
+        int sum=0;
+        for (ComputerDevice computerDevice : computerDevices) {
+            sum += computerDevice.getPower();
         }
-        return power;
+        return sum;
     }
 }
