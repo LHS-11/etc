@@ -318,6 +318,8 @@ ex) 복합기 라는 클래스에 복사, 팩스, 프린트 하는 기능이 있
 => 구체적인 이동 방식과 공격 방식을 담은 구체적인 클래스들은 은닉하고 이를 위해 공격과 이동을 위한 인터페이스를 만들고 이들을 실제
 
 실현한 클래스를 만들어야 함
+
+### 스트래티지 패턴 
 ![image](https://user-images.githubusercontent.com/77667212/205478703-0436abaf-6450-4f2b-b776-7ec89d426325.png)
 
 ---------------------------------------------------------------------------------------------------------------
@@ -569,9 +571,9 @@ class Something{
 -> 상태 변화가 생길 때마다 새로운 상태 객체를 생성해 메모리 낭비와 성능 저하를 가져올 수 있음
 
 -> 싱글톤 패턴을 사용해 해결
-![image](https://user-images.githubusercontent.com/77667212/205425656-141d618a-9892-49e0-a082-9622903578ca.png)
 
 ### 스테이트 패턴의 컬레보레이션
+![image](https://user-images.githubusercontent.com/77667212/205425656-141d618a-9892-49e0-a082-9622903578ca.png)
 - State (State) : 시스템의 모든 상태에 공통된 인터페이스를 제공 -> 이 인터페이스를 실체화한 어떤 상태 클래스도 기존 상태 클래스를 대신해 교체 가능
 
 - State1,2,3 (ON,OFF) : Context 객체가 요청한 작업을 자신의 방식으로 실제 실행, 대부분의 경우 다음 상태를 결정해 상태 변경을 Context 객체에 요청하는 역할도 수행
@@ -618,11 +620,14 @@ ex) 버튼 처음 눌렀을 때 램프 켜짐, 두 번 눌렀을 때 알람 동�
 ### 해결책
 - 구체적인 기능을 직접 구현하는 대신 실행될 기능을 클래스 외부에서 제공받아 캡슐화해 실행 메서드에서 호출
 
-![image](https://user-images.githubusercontent.com/77667212/205427818-32a6e28c-c566-482f-be67-5530d544563a.png)
 ### 커맨드 패턴의 컬레보레이션
+![image](https://user-images.githubusercontent.com/77667212/205427818-32a6e28c-c566-482f-be67-5530d544563a.png)
 - Command (Command) : 실행될 기능에 대한 인터페이스, 실행될 기능을 execute 메서드로 선언
+
 - ConcreteCommand (AlarmCommand, LampCommand) : 실제로 실행되는 기능을 구현 (Command 인터페이시를 구현)
+
 - Invoker (Button) : 기능의 실행을 요청하는 호출자 클래스
+-
 - Receiver (Alarm, Lamp) : ConcreteCommand 에서 execute 메서드를 구현할 때 필요한 클래스 ( Concrete Command 의 기능을 실행하기 위해 사용하는 수신자 클래스 )
 
 ### 장점과 단점
@@ -659,9 +664,9 @@ ex) 성적이 입력되었을 때 최대 3개 목록, 최대 5개 목록, 최소
 
 => 공통 기능을 상위 클래스 및 인터페이스로 일반화하고 이를 활용해 ScoreRecord 를 구현하는 방식으로 설계
 
-![image](https://user-images.githubusercontent.com/77667212/205430045-1639e096-1654-4174-9a39-3c3bb91665a3.png)
 
 ### 옵저버 패턴의 컬레보레이션
+![image](https://user-images.githubusercontent.com/77667212/205430045-1639e096-1654-4174-9a39-3c3bb91665a3.png)
 - Subject : ConcreteObserver 객체를 관리하는 요소, Observer 인터페이스를 참조해서 ConcreteObserver 를 관리하므로 ConcreteObserver 의 변화에 독립적
 - ConcreteSubject : 변경 관리 대상이 되는 데이터가 있는 클래스, 데이터 변경을 위한 메서드인 setState 가 있으며 setState 에서는 자신의 데이터인 subjectState 를 변경하고 Subject 의 notifyObservers 메서드를 호출해서 ConcreteObserver 객체에 변경을 통보함.
 - Observer : 데이터의 변경을 통보 받는 인터페이스, Subject 에서는 Observer 인터페이스의 update 메서드를 호출함으로써 ConcreteSubject 의 데이터 변경을 ConcreteObserver 에게 통보함
@@ -681,9 +686,8 @@ ex) 기본 도로 표시에 차선 표시 기능과 교통량 표시 기능 추�
 ### 해결책 
 => 각 추가 기능별로 개별적인 클래스를 설계하고 기능을 조합할 때 각 클래스의 객체 조합을 이용하면 됨
 
-![image](https://user-images.githubusercontent.com/77667212/205431554-10b236f9-b3db-4b5b-a768-089ffa9367b8.png)
-
 ### 데커레이터 패턴의 컬래보레이션
+![image](https://user-images.githubusercontent.com/77667212/205431554-10b236f9-b3db-4b5b-a768-089ffa9367b8.png)
 - Component : 기본 기능을 뜻하는 ConcreteComponent 와 추가 기능을 뜻하는 Decorator 의 공통 기능을 정의
 - ConcreteComponent : 기본 기능을 구현하는 클래스
 - Decorator : 많은 수가 존재하는 구체적인 Decorator 의 공통 기능을 제공
@@ -701,9 +705,9 @@ ex) 기본 도로 표시에 차선 표시 기능과 교통량 표시 기능 추�
 
 (상위 클래스에서 템플릿을 구성하고 세세한 구현은 서브 클래스에서 구현함)
 
-![image](https://user-images.githubusercontent.com/77667212/205478670-52d26e04-6e7f-42b0-b0ec-6d2063032309.png)
 
 ### 템플릿 메서드 패턴의 컬레보레이션
+![image](https://user-images.githubusercontent.com/77667212/205478670-52d26e04-6e7f-42b0-b0ec-6d2063032309.png)
 - AbstractClass : 템플릿 메서드를 정의하는 클래스, 하위 클래스에 공통 알고리즘을 정의하고 하위 클래스에서 구현될 기능을 primitive 메서드 또는 hook 메서드로 정의하는 클래스
 - ConcreteClass : 물려받은 primitive 메서드 또는 hook 메서드를 구현하는 클래스, 상위 클래스에 구현된 템플릿 메서드의 일반적인 알고리즘에서 하위 클래스에 적합하게  primitive 메서드 또는 hook 메서드를 오버라이드 하는 클래스
 --------------------------------------------------------------------------------------
@@ -744,6 +748,7 @@ ex) 오전에는 대기시간 최소화 전략을 사용하고 오후에는 처�
 구체적인 부품들을 일반화한 클래스를 정의하고 이를 Computer 클래스가 가리키게 함
 
 ### 컴퍼지트 컬레보레이션
+![image](https://user-images.githubusercontent.com/77667212/205483941-902e3fca-5827-4bfa-bd71-60770f7c7693.png)
 - Component : 구체적인 부분, 즉 Leaf 클래스와 전체에 해당하는 Composite 클래스에 공통 인터페이스를 정의
 - Leaf : 구체적인 부분 클래스로 Composite 객체의 부품으로 설정
 - Composite : 전체 클래스로 복수 개의 Component 를 갖도록 정의, 복수 개의 Leaf, 심지어 복수 개의 Composite 객체를 부분으로 가질 수 있음.
