@@ -1,6 +1,5 @@
 package chapter12;
 
-import chapter12.refactor.Direction;
 
 public class ThroughputScheduler {
 
