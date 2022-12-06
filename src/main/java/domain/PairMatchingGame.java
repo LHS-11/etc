@@ -15,13 +15,26 @@ public class PairMatchingGame {
     private CrewInfo frontEndCrews;
     private CrewInfo backEndCrews;
 
+    private int retryCount=0;
+
+    public CrewInfo getFrontEndCrews() {
+        return frontEndCrews;
+    }
+
+    public CrewInfo getBackEndCrews() {
+        return backEndCrews;
+    }
 
     public PairMatchingGame() {
         crewRandomGenerator = new CrewRandomGenerator();
         pairMatchingFileReader = new PairMatchingFileReader();
         crewPairMatchingGroup = new CrewPairMatchingGroup();
-        frontEndCrews = new CrewInfo(Course.BACKEND, getFile(Course.BACKEND));
-        backEndCrews = new CrewInfo(Course.FRONTEND, getFile(Course.FRONTEND));
+        backEndCrews = new CrewInfo(Course.BACKEND, getFile(Course.BACKEND));
+        frontEndCrews = new CrewInfo(Course.FRONTEND, getFile(Course.FRONTEND));
+    }
+
+    public int getRetryCount() {
+        return retryCount;
     }
 
     public List<String> getFile(Course course) {
@@ -44,19 +57,42 @@ public class PairMatchingGame {
         return crewRandomGenerator.shuffleCrew(crewInfo.getNames());
     }
 
-    public List<CrewPair> matchPair(String course,String level,String mission){
+    public CrewPairMatchingInfo matchPair(Course course,Level level,Mission mission){
         List<CrewPair> crewPairs = null;
-        if(course==Course.BACKEND.name()){
+        CrewPairMatchingInfo crewPairMatchingInfo = null;
+        retryCount+=1;
+
+        if(course==Course.BACKEND){
             List<String> shuffleCrews = shuffleCrews(backEndCrews);
             crewPairs = PairMatcher.matchPairs(shuffleCrews);
-            crewPairMatchingGroup.addCrewPairMatingInfo( new CrewPairMatchingInfo(Course.BACKEND, findLevel(level), findMission(mission), crewPairs));
+            crewPairMatchingInfo = new CrewPairMatchingInfo(Course.BACKEND, level, mission, crewPairs);
         }
-        if(course==Course.FRONTEND.name()){
+        if(course==Course.FRONTEND){
             List<String> shuffleCrews = shuffleCrews(frontEndCrews);
             crewPairs = PairMatcher.matchPairs(shuffleCrews);
-            crewPairMatchingGroup.addCrewPairMatingInfo( new CrewPairMatchingInfo(Course.BACKEND, findLevel(level), findMission(mission), crewPairs));
+            crewPairMatchingInfo = new CrewPairMatchingInfo(Course.BACKEND, level, mission, crewPairs);
         }
-        return crewPairs;
+        crewPairMatchingGroup.addCrewPairMatingInfo(crewPairMatchingInfo);
+
+        return crewPairMatchingInfo;
+    }
+
+    public boolean isDuplicatedPair(CrewPairMatchingInfo crewPairMatchingInfo){
+        if(crewPairMatchingGroup.isDuplicatedPairMatching(crewPairMatchingInfo)){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isPresentPairInfo(CrewPairMatchingInfo crewPairMatchingInfo){
+        if(crewPairMatchingInfo.isSameCrewPairInfo(crewPairMatchingInfo)){
+            return true;
+        }
+        return false;
+    }
+
+    public CrewPairMatchingInfo findCrewPairMatchingInfo(CrewPairMatchingInfo crewPairMatchingInfo){
+        return crewPairMatchingGroup.findCrewPairMatching(crewPairMatchingInfo);
     }
 
 

@@ -6,7 +6,6 @@ public class CrewPairMatchingInfo {
 
     private Course course;
     private Level level;
-
     private Mission mission;
     private List<CrewPair> crewPairs;
 
@@ -16,6 +15,7 @@ public class CrewPairMatchingInfo {
         this.mission = mission;
         this.crewPairs = crewPairs;
     }
+
 
     public List<CrewPair> getCrewPairs() {
         return crewPairs;
@@ -27,5 +27,9 @@ public class CrewPairMatchingInfo {
 
     public boolean isSameCrewPair(List<CrewPair> other){
         return other.containsAll(crewPairs);
+    }
+
+    public boolean isSameCrewPairInfo(CrewPairMatchingInfo other){
+        return other.level == this.level && other.course == this.course && other.mission == this.mission;
     }
 }

@@ -1,9 +1,14 @@
 package controller;
 
+import domain.CrewPair;
+import domain.CrewPairMatchingInfo;
+import domain.MatchingInfo;
 import domain.PairMatchingGame;
 import validation.InputValidator;
 import view.InputView;
 import view.OutputView;
+
+import java.util.List;
 
 public class PairMatchingController {
 
@@ -11,32 +16,76 @@ public class PairMatchingController {
     private final OutputView outputView;
     private static PairMatchingGame pairMatchingGame = new PairMatchingGame();
 
-    public PairMatchingController(InputView inputView, OutputView outputView) {
-        this.inputView = inputView;
-        this.outputView = outputView;
+    public PairMatchingController() {
+        this.inputView = new InputView();
+        this.outputView = new OutputView();
     }
 
-    public void go(){
-
+    public void go() {
+        start();
     }
 
-    public void start(){
-        String pairMatching = getPairMatching();
-        matchPairs(pairMatching);
-        if(pairMatching.equals("2")){
-
+    public void start() {
+        while (true) {
+            String pairMatching = getPairMatching();
+            matchPairs(pairMatching);
+            readMatchPairs(pairMatching);
+            initMatchPairs(pairMatching);
+            if (pairMatching.equals("Q")) {
+                break;
+            }
         }
-        if(pairMatching.equals("3")){
+    }
 
+    private static void initMatchPairs(String pairMatching) {
+        if (pairMatching.equals("3")) {
+            pairMatchingGame = new PairMatchingGame();
         }
-        if(pairMatching.equals("Q")){
+    }
 
+    private void readMatchPairs(String pairMatching) {
+        if (pairMatching.equals("2")) {
+            MatchingInfo matchingInfo = getMatchingInfo();
+            CrewPairMatchingInfo crewPairMatchingInfo = new CrewPairMatchingInfo(matchingInfo.getCourse()
+                    , matchingInfo.getLevel(), matchingInfo.getMission(), null);
+            if(pairMatchingGame.isPresentPairInfo(crewPairMatchingInfo)){
+                outputView.printPairMatchingResult(pairMatchingGame.findCrewPairMatchingInfo(crewPairMatchingInfo).getCrewPairs());
+            }else{
+                throw new IllegalArgumentException("[ERROR] 매칭 이력이 없습니다.");
+            }
         }
     }
 
     public void matchPairs(String pairMatching) {
-        if(pairMatching.equals("1")){
-            String pairMatchingInfo=inputView.selectPairMatching();
+        if (pairMatching.equals("1")) {
+            MatchingInfo matchingInfo = getMatchingInfo();
+            CrewPairMatchingInfo crewPairMatchingInfo = new CrewPairMatchingInfo(matchingInfo.getCourse()
+                    , matchingInfo.getLevel(), matchingInfo.getMission(), null);
+            if(pairMatchingGame.isPresentPairInfo(crewPairMatchingInfo)){
+                String input = inputView.selectPairMatchingRetry();
+
+            }
+            if(!pairMatchingGame.isPresentPairInfo(crewPairMatchingInfo)){
+                crewPairMatchingInfo = pairMatchingGame.matchPair(matchingInfo.getCourse(), matchingInfo.getLevel(), matchingInfo.getMission());
+            }
+
+            do {
+                crewPairMatchingInfo = pairMatchingGame.matchPair(matchingInfo.getCourse(), matchingInfo.getLevel(), matchingInfo.getMission());
+                if(pairMatchingGame.getRetryCount()>3){
+                    throw new IllegalArgumentException("[ERROR] : 매칭 실패 ");
+                }
+            } while (!pairMatchingGame.isDuplicatedPair(crewPairMatchingInfo));
+            List<CrewPair> crewPairs = crewPairMatchingInfo.getCrewPairs();
+            outputView.printPairMatchingResult(crewPairs);
+        }
+    }
+
+    private MatchingInfo getMatchingInfo() {
+        try {
+            return new MatchingInfo(inputView.selectPairMatching());
+        } catch (IllegalArgumentException e) {
+            outputView.printError(e.getMessage());
+            return getMatchingInfo();
         }
     }
 
@@ -46,7 +95,7 @@ public class PairMatchingController {
             InputValidator.validateFeatureInput(feature);
             return feature;
 
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             outputView.printError(e.getMessage());
             return getPairMatching();
         }
