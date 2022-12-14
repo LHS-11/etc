@@ -52,4 +52,8 @@ public class OutputView {
     private static void printLineList(){
         System.out.println(STATION_LIST_MESSAGE.getMessage());
     }
+
+    public void printLineRemoving(){
+        System.out.println(LINE_REMOVING_SUCCESS_MESSAGE.getMessage());
+    }
 }

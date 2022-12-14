@@ -1,14 +1,12 @@
 package subway.controller;
 
-import subway.domain.LineCommand;
-import subway.domain.LineRepository;
-import subway.domain.Station;
-import subway.domain.StationCommand;
+import subway.domain.*;
 import subway.view.InputView;
 import subway.view.OutputView;
 
 import static subway.domain.FunctionCommand.*;
 import static subway.domain.LineCommand.*;
+import static subway.domain.LineRepository.*;
 import static subway.domain.LineRepository.lines;
 import static subway.domain.StationCommand.*;
 import static subway.domain.StationRepository.*;
@@ -69,10 +67,21 @@ public class SubwayController {
 
     private void selectLineRemove(String lineFunctionCommand) {
         if(lineFunctionCommand.equals("2")){
-
+            Line line = getLineToRemove();
+            deleteLineByName(line.getName());
+            outputView.printLineRemoving();
         }
     }
-
+    private Line getLineToRemove() {
+        try {
+            Line line = new Line(inputView.inputLineToRemove());
+            validatePresentLine(line);
+            return line;
+        }catch (IllegalArgumentException e){
+            outputView.printErrorMessage(e.getMessage());
+            return getLineToRemove();
+        }
+    }
     private void selectLineReading(String lineFunctionCommand) {
         if(lineFunctionCommand.equals("3")){
             outputView.printLineInfo(lines());

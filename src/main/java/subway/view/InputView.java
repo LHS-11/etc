@@ -21,4 +21,14 @@ public class InputView {
         System.out.println(REMOVE_STATION_MESSAGE.getMessage());
         return Console.readLine();
     }
+
+    public String inputLineToRegister(){
+        System.out.println(REGISTER_LINE_MESSAGE.getMessage());
+        return Console.readLine();
+    }
+
+    public String inputLineToRemove(){
+        System.out.println(REMOVE_LINE_MESSAGE.getMessage());
+        return Console.readLine();
+    }
 }
