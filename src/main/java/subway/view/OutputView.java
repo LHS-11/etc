@@ -41,7 +41,7 @@ public class OutputView {
     }
 
     public void printLineControlView(){
-        System.out.println(LINE_VIEW_MESSAGE);
+        System.out.println(LINE_VIEW_MESSAGE.getMessage());
     }
 
     public void printLineInfo(List<Line> lines){
@@ -55,5 +55,17 @@ public class OutputView {
 
     public void printLineRemoving(){
         System.out.println(LINE_REMOVING_SUCCESS_MESSAGE.getMessage());
+    }
+
+    public void printUpBoundFinalStation(){
+        System.out.println(REGISTER_UP_BOUND_STATION_MESSAGE.getMessage());
+    }
+
+    public void printDownBoundFinalStation(){
+        System.out.println(REGISTER_DOWN_BOUND_STATION_MESSAGE.getMessage());
+    }
+
+    public void printStationRegistration(){
+        System.out.println(REGISTER_STATION_MESSAGE.getMessage());
     }
 }

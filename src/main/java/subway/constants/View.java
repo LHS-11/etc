@@ -24,15 +24,19 @@ public enum View {
             "1. 노선 등록\n" +
             "2. 노선 삭제\n" +
             "3. 노선 조회\n" +
-            "B. 돌아가기"),
+            "B. 돌아가기\n"),
 
     REGISTER_LINE_MESSAGE("## 등록할 노선 이름을 입력하세요."),
 
     REGISTER_UP_BOUND_STATION_MESSAGE("## 등록할 노선의 상행 종점역 이름을 입력하세요."),
     REGISTER_DOWN_BOUND_STATION_MESSAGE("## 등록할 노선의 하행 종점역 이름을 입력하세요."),
     LINE_REMOVING_SUCCESS_MESSAGE("[INFO] 지하철 노선이 삭제되었습니다."),
-    REMOVE_LINE_MESSAGE("## 삭제할 노선 이름을 입력하세요.");
+    REMOVE_LINE_MESSAGE("## 삭제할 노선 이름을 입력하세요."),
 
+    SECTION_VIEW_MESSAGE("## 구간 관리 화면\n" +
+            "1. 구간 등록\n" +
+            "2. 구간 삭제\n" +
+            "B. 돌아가기\n");
 
 
 

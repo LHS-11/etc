@@ -17,12 +17,20 @@ public class Station {
     }
 
     // 추가 기능 구현
-    public boolean isSame(Station other){
+    public boolean isSameStation(Station other){
         return this.name.equals(other.getName());
     }
 
     public void validateStation(String name){
         validateNameSize(name);
+    }
+
+    public boolean isStationPresentLine(){
+        return line != null;
+    }
+
+    public void addLine(Line line){
+        this.line = line;
     }
 
 }

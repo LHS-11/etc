@@ -23,7 +23,7 @@ public class LineRepository {
         return lines.removeIf(line -> Objects.equals(line.getName(), name));
     }
 
-    public static void validateDuplicateLine(Line line){
+    public static void validateDuplicatedLine(Line line){
         if(isPresentLine(line)){
             throw new IllegalArgumentException(DUPLICATED_NAME_ERROR_MESSAGE.getMessage());
         }
@@ -36,4 +36,5 @@ public class LineRepository {
     public static boolean isPresentLine(Line line) {
         return lines.stream().anyMatch(l-> l.isSameLine(line));
     }
+
 }

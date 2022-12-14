@@ -46,22 +46,86 @@ public class SubwayController {
     public void playFunction(String functionCommand){
         selectStationManagement(functionCommand);
         selectLineManagement(functionCommand);
-        if(functionCommand .equals("3")){
-            
-        }
+        selectSectionManagement(functionCommand);
         if(functionCommand .equals("4")){
             
         }
 
     }
 
+    private void selectSectionManagement(String functionCommand) {
+        if(functionCommand.equals("3")){
+
+        }
+    }
+
     public void selectLineManagement(String functionCommand) {
         if(functionCommand.equals("2")){
            outputView.printLineControlView();
             String lineFunctionCommand = getLineFunctionCommand();
-//            selectLineRegistration(lineFunctionCommand);
+            selectLineRegistration(lineFunctionCommand);
             selectLineRemove(lineFunctionCommand);
             selectLineReading(lineFunctionCommand);
+        }
+    }
+
+    private String getLineFunctionCommand() {
+        try {
+            String lineFunctionCommand = inputView.inputFunction();
+            validateLineCommand(lineFunctionCommand);
+            return lineFunctionCommand;
+        }catch (IllegalArgumentException e){
+            outputView.printErrorMessage(e.getMessage());
+            return getStationFunctionCommand();
+        }
+
+    }
+    private void selectLineRegistration(String lineFunctionCommand) {
+        if(lineFunctionCommand.equals("1")){
+            Line line = getLine();
+            Station upFinalStation = getUpFinalStation();
+            addLineToStation(upFinalStation,line);
+            Station downFinalStation = getDownFinalStation();
+            addLineToStation(downFinalStation,line);
+            line.addFinalStation(upFinalStation,downFinalStation);
+            addLine(line);
+        }
+    }
+
+    public Station getUpFinalStation() {
+        try {
+            outputView.printUpBoundFinalStation();
+            Station station = new Station(inputView.inputStation());
+            validatePresentStation(station);
+            validateStationPresentLine(station);
+            return station;
+        }catch (IllegalArgumentException e){
+            outputView.printErrorMessage(e.getMessage());
+            return getUpFinalStation();
+        }
+    }
+
+    public Station getDownFinalStation() {
+        try {
+            outputView.printDownBoundFinalStation();
+            Station station = new Station(inputView.inputStation());
+            validatePresentStation(station);
+            validateStationPresentLine(station);
+            return station;
+        }catch (IllegalArgumentException e){
+            outputView.printErrorMessage(e.getMessage());
+            return getDownFinalStation();
+        }
+    }
+
+    private Line getLine() {
+        try {
+            Line line = new Line(inputView.inputLineToRegister());
+            validateDuplicatedLine(line);
+            return line;
+        }catch (IllegalArgumentException e){
+            outputView.printErrorMessage(e.getMessage());
+            return getLine();
         }
     }
 
@@ -88,18 +152,12 @@ public class SubwayController {
         }
     }
 
-    private String getLineFunctionCommand() {
-        try {
-            String lineFunctionCommand = inputView.inputFunction();
-            validateLineCommand(lineFunctionCommand);
-            return lineFunctionCommand;
-        }catch (IllegalArgumentException e){
-            outputView.printErrorMessage(e.getMessage());
-            return getStationFunctionCommand();
-        }
 
-    }
 
+    /**
+     * 밑에는 역 관리 기능
+     * @param functionCommand
+     */
     public void selectStationManagement(String functionCommand) {
         if(functionCommand .equals("1")){
             outputView.printStationControlView();
@@ -125,6 +183,7 @@ public class SubwayController {
 
     public void selectStationRegistration(String stationFunctionCommand) {
         if(stationFunctionCommand.equals("1")){
+            outputView.printStationRegistration();
             Station station= getStation();
             addStation(station);
             outputView.printStationSuccess();
@@ -132,7 +191,7 @@ public class SubwayController {
     }
     public Station getStation() {
         try {
-            Station station = new Station(inputView.inputStationToRegister());
+            Station station = new Station(inputView.inputStation());
             validateDuplicatedStation(station);
             return station;
         }catch (IllegalArgumentException e){

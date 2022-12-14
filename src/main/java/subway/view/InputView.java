@@ -17,6 +17,10 @@ public class InputView {
         return Console.readLine();
     }
 
+    public String inputStation(){
+        return Console.readLine();
+    }
+
     public String inputStationToRemove(){
         System.out.println(REMOVE_STATION_MESSAGE.getMessage());
         return Console.readLine();
@@ -31,4 +35,5 @@ public class InputView {
         System.out.println(REMOVE_LINE_MESSAGE.getMessage());
         return Console.readLine();
     }
+
 }

@@ -5,8 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import static subway.constants.ErrorMessage.DUPLICATED_NAME_ERROR_MESSAGE;
-import static subway.constants.ErrorMessage.NON_PRESENT_ERROR_MESSAGE;
+import static subway.constants.ErrorMessage.*;
 
 public class StationRepository {
     private static final List<Station> stations = new ArrayList<>();
@@ -33,9 +32,27 @@ public class StationRepository {
             throw new IllegalArgumentException(NON_PRESENT_ERROR_MESSAGE.getMessage());
         }
     }
-    public static boolean isPresentStation(Station station) {
-        return stations.stream().anyMatch(s -> s.isSame(station));
+    private static boolean isPresentStation(Station station) {
+        return stations.stream().anyMatch(s -> s.isSameStation(station));
     }
 
+    public static void validateStationPresentLine(Station station){
+        if(isPresentLine(station)) {
+            throw new IllegalArgumentException(PRESENT_LINE_ERROR_MESSAGE.getMessage());
+        }
+    }
+
+    private static boolean isPresentLine(Station station){
+        return stations.stream().filter(s->s.isSameStation(station))
+                .anyMatch(s->s.isStationPresentLine());
+    }
+
+    public static void addLineToStation(Station station, Line line){
+        Station foundStation = stations.stream()
+                .filter(s -> s.isSameStation(station))
+                .findAny()
+                .orElseThrow(()->new IllegalArgumentException("[ERROR] : 지하철 역이 존재하지 않습니다."));
+        foundStation.addLine(line);
+    }
 
 }
