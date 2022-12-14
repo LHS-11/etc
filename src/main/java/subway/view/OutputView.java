@@ -1,7 +1,6 @@
 package subway.view;
 
-import static subway.constants.View.MAIN_VIEW_MESSAGE;
-import static subway.constants.View.STATION_VIEW_MESSAGE;
+import static subway.constants.View.*;
 
 public class OutputView {
 
@@ -15,5 +14,9 @@ public class OutputView {
 
     public void printErrorMessage(String message){
         System.out.println(message);
+    }
+
+    public void printStationSuccess(){
+        System.out.println(STATION_REGISTRATION_SUCCESS_MESSAGE.getMessage());
     }
 }

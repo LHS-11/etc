@@ -24,7 +24,8 @@ public enum View {
     REGISTER_LINE_MESSAGE("## 등록할 노선 이름을 입력하세요."),
 
     REGISTER_UP_BOUND_STATION_MESSAGE("## 등록할 노선의 상행 종점역 이름을 입력하세요."),
-    REGISTER_DOWN_BOUND_STATION_MESSAGE("## 등록할 노선의 하행 종점역 이름을 입력하세요.");
+    REGISTER_DOWN_BOUND_STATION_MESSAGE("## 등록할 노선의 하행 종점역 이름을 입력하세요."),
+    STATION_REGISTRATION_SUCCESS_MESSAGE("[INFO] 지하철 역이 등록되었습니다.");
 
 
 
