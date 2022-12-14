@@ -96,7 +96,22 @@ public class SubwayController {
         }
     }
     public void selectStationRemove(String stationFunctionCommand) {
+        if(stationFunctionCommand.equals("2")){
+            Station station = getStationToRemove();
+            deleteStation(station.getName());
+            outputView.printStationRemoving();
+        }
+    }
 
+    private Station getStationToRemove() {
+        try {
+            Station station = new Station(inputView.inputStationToRemove());
+            validatePresentStation(station);
+            return station;
+        }catch (IllegalArgumentException e){
+            outputView.printErrorMessage(e.getMessage());
+            return getStation();
+        }
     }
 
     public void selectStationReading(String stationFunctionCommand) {

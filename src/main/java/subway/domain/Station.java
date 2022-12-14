@@ -16,7 +16,7 @@ public class Station {
 
     // 추가 기능 구현
     public boolean isSame(Station other){
-        return this.name == other.name;
+        return this.name.equals(other.getName());
     }
 
     public void validateStation(String name){

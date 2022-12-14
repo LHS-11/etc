@@ -28,12 +28,16 @@ public class OutputView {
         System.out.println(STATION_REGISTRATION_SUCCESS_MESSAGE.getMessage());
     }
 
+    public void printStationRemoving(){
+        System.out.println(STATION_REMOVING_SUCCESS_MESSAGE.getMessage());
+    }
+
     public void printStationInfo(List<Station> stations){
         printStationList();
         stations.stream().map(s->s.getName()).forEach(name-> System.out.println(INFO+" "+name));
     }
 
     public void printStationList(){
-        System.out.println(STATION_LIST_MESSAGE);
+        System.out.println(STATION_LIST_MESSAGE.getMessage());
     }
 }
