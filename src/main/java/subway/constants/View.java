@@ -15,7 +15,7 @@ public enum View {
             "1. 역 등록\n" +
             "2. 역 삭제\n" +
             "3. 역 조회\n" +
-            "B. 돌아가기"),
+            "B. 돌아가기\n"),
 
     REGISTER_STATION_MESSAGE("## 등록할 역 이름을 입력하세요."),
 

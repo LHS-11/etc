@@ -1,11 +1,12 @@
 package subway.controller;
 
 import subway.domain.Station;
-import subway.domain.StationRepository;
+import subway.domain.StationCommand;
 import subway.view.InputView;
 import subway.view.OutputView;
 
 import static subway.domain.FunctionCommand.*;
+import static subway.domain.StationCommand.*;
 import static subway.domain.StationRepository.*;
 
 public class SubwayController {
@@ -28,7 +29,7 @@ public class SubwayController {
             try {
                 outputView.printMainView();
                 String functionCommand = inputView.inputFunction();
-                validateCommand(functionCommand);
+                validateFunctionCommand(functionCommand);
                 playFunction(functionCommand);
                 if(functionCommand.equals("Q")){
                     break;
@@ -57,6 +58,35 @@ public class SubwayController {
     public void selectStationManagement(String functionCommand) {
         if(functionCommand .equals("1")){
             outputView.printStationControlView();
+            String stationFunctionCommand = getStationFunctionCommand();
+            selectStationRegistration(stationFunctionCommand);
+            if(stationFunctionCommand.equals("2")){
+
+            }
+            if(stationFunctionCommand.equals("3")){
+
+            }
+            if(stationFunctionCommand.equals("B")){
+
+            }
+
+        }
+    }
+
+    private String getStationFunctionCommand() {
+        try {
+            String stationFunctionCommand = inputView.inputFunction();
+            validateStationCommand(stationFunctionCommand);
+            return stationFunctionCommand;
+        }catch (IllegalArgumentException e){
+            outputView.printErrorMessage(e.getMessage());
+            return getStationFunctionCommand();
+        }
+
+    }
+
+    public void selectStationRegistration(String stationFunctionCommand) {
+        if(stationFunctionCommand.equals("1")){
             Station station= getStation();
             addStation(station);
             outputView.printStationSuccess();
