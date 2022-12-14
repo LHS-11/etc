@@ -9,7 +9,7 @@ public enum StationCommand {
     FIRST("1","1. 역 등록"),
     SECOND("2","2. 역 삭제"),
     THIRD("3","3. 역 조회"),
-    FOURTH("4","B. 돌아가기");
+    FOURTH("B","B. 돌아가기");
 
     private String command;
     private String name;

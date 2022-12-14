@@ -60,15 +60,8 @@ public class SubwayController {
             outputView.printStationControlView();
             String stationFunctionCommand = getStationFunctionCommand();
             selectStationRegistration(stationFunctionCommand);
-            if(stationFunctionCommand.equals("2")){
-
-            }
-            if(stationFunctionCommand.equals("3")){
-
-            }
-            if(stationFunctionCommand.equals("B")){
-
-            }
+            selectStationRemove(stationFunctionCommand);
+            selectStationReading(stationFunctionCommand);
 
         }
     }
@@ -92,7 +85,6 @@ public class SubwayController {
             outputView.printStationSuccess();
         }
     }
-
     public Station getStation() {
         try {
             Station station = new Station(inputView.inputStationToRegister());
@@ -103,4 +95,15 @@ public class SubwayController {
             return getStation();
         }
     }
+    public void selectStationRemove(String stationFunctionCommand) {
+
+    }
+
+    public void selectStationReading(String stationFunctionCommand) {
+        if(stationFunctionCommand.equals("3")){
+           outputView.printStationInfo(stations());
+        }
+    }
+
+
 }

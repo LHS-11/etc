@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static subway.constants.ErrorMessage.DUPLICATED_STATION_ERROR_MESSAGE;
+import static subway.constants.ErrorMessage.NON_PRESENT_STATION_ERROR_MESSAGE;
 
 public class StationRepository {
     private static final List<Station> stations = new ArrayList<>();
@@ -25,6 +26,11 @@ public class StationRepository {
     public static void validateDuplicatedStation(Station station){
         if(isPresentStation(station)){
             throw new IllegalArgumentException(DUPLICATED_STATION_ERROR_MESSAGE.getMessage());
+        }
+    }
+    public static void validatePresentStation(Station station){
+        if(!isPresentStation(station)){
+            throw new IllegalArgumentException(NON_PRESENT_STATION_ERROR_MESSAGE.getMessage());
         }
     }
     public static boolean isPresentStation(Station station) {
