@@ -1,12 +1,11 @@
 package subway.view;
 
+import subway.domain.Line;
 import subway.domain.Station;
 
 import java.util.List;
 
 import static subway.constants.View.*;
-import static subway.domain.StationRepository.deleteStation;
-import static subway.domain.StationRepository.validatePresentStation;
 
 public class OutputView {
 
@@ -37,7 +36,20 @@ public class OutputView {
         stations.stream().map(s->s.getName()).forEach(name-> System.out.println(INFO+" "+name));
     }
 
-    public void printStationList(){
+    private static void printStationList(){
+        System.out.println(STATION_LIST_MESSAGE.getMessage());
+    }
+
+    public void printLineControlView(){
+        System.out.println(LINE_VIEW_MESSAGE);
+    }
+
+    public void printLineInfo(List<Line> lines){
+        printLineList();
+        lines.stream().map(s->s.getName()).forEach(name-> System.out.println(INFO+" "+name));
+    }
+
+    private static void printLineList(){
         System.out.println(STATION_LIST_MESSAGE.getMessage());
     }
 }

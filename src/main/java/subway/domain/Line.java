@@ -16,4 +16,8 @@ public class Line {
     }
 
     // 추가 기능 구현
+    public boolean isSameLine(Line other){
+        return this.name.equals(other.getName());
+    }
+
 }

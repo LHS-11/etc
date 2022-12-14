@@ -1,11 +1,15 @@
 package subway.controller;
 
+import subway.domain.LineCommand;
+import subway.domain.LineRepository;
 import subway.domain.Station;
 import subway.domain.StationCommand;
 import subway.view.InputView;
 import subway.view.OutputView;
 
 import static subway.domain.FunctionCommand.*;
+import static subway.domain.LineCommand.*;
+import static subway.domain.LineRepository.lines;
 import static subway.domain.StationCommand.*;
 import static subway.domain.StationRepository.*;
 
@@ -43,14 +47,46 @@ public class SubwayController {
 
     public void playFunction(String functionCommand){
         selectStationManagement(functionCommand);
-        if(functionCommand .equals("2")){
-            
-        }
+        selectLineManagement(functionCommand);
         if(functionCommand .equals("3")){
             
         }
         if(functionCommand .equals("4")){
             
+        }
+
+    }
+
+    public void selectLineManagement(String functionCommand) {
+        if(functionCommand.equals("2")){
+           outputView.printLineControlView();
+            String lineFunctionCommand = getLineFunctionCommand();
+//            selectLineRegistration(lineFunctionCommand);
+            selectLineRemove(lineFunctionCommand);
+            selectLineReading(lineFunctionCommand);
+        }
+    }
+
+    private void selectLineRemove(String lineFunctionCommand) {
+        if(lineFunctionCommand.equals("2")){
+
+        }
+    }
+
+    private void selectLineReading(String lineFunctionCommand) {
+        if(lineFunctionCommand.equals("3")){
+            outputView.printLineInfo(lines());
+        }
+    }
+
+    private String getLineFunctionCommand() {
+        try {
+            String lineFunctionCommand = inputView.inputFunction();
+            validateLineCommand(lineFunctionCommand);
+            return lineFunctionCommand;
+        }catch (IllegalArgumentException e){
+            outputView.printErrorMessage(e.getMessage());
+            return getStationFunctionCommand();
         }
 
     }

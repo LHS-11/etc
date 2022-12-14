@@ -5,6 +5,8 @@ import static subway.domain.Validator.*;
 public class Station {
     private String name;
 
+    private Line line;
+
     public Station(String name) {
         validateStation(name);
         this.name = name;

@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import static subway.constants.ErrorMessage.DUPLICATED_STATION_ERROR_MESSAGE;
+import static subway.constants.ErrorMessage.NON_PRESENT_STATION_ERROR_MESSAGE;
+
 public class LineRepository {
     private static final List<Line> lines = new ArrayList<>();
 
@@ -19,4 +22,6 @@ public class LineRepository {
     public static boolean deleteLineByName(String name) {
         return lines.removeIf(line -> Objects.equals(line.getName(), name));
     }
+
+
 }
