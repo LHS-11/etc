@@ -1,6 +1,5 @@
 package subway.controller;
 
-import subway.domain.FunctionCommand;
 import subway.view.InputView;
 import subway.view.OutputView;
 
@@ -36,6 +35,24 @@ public class SubwayController {
     }
 
     public void playFunction(String functionCommand){
+        selectStationManagement(functionCommand);
+        if(functionCommand=="2"){
+            
+        }
+        if(functionCommand=="3"){
+            
+        }
+        if(functionCommand=="4"){
+            
+        }
+        if(functionCommand=="Q"){
+            
+        }
+    }
 
+    public void selectStationManagement(String functionCommand) {
+        if(functionCommand =="1"){
+            inputView.inputStationToRegister();
+        }
     }
 }
