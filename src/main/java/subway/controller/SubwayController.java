@@ -57,7 +57,8 @@ public class SubwayController {
     public void selectStationManagement(String functionCommand) {
         if(functionCommand .equals("1")){
             Station station= getStation();
-
+            addStation(station);
+            outputView.printStationSuccess();
         }
     }
 
