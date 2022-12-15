@@ -18,5 +18,14 @@ public class Line {
     }
 
     // 추가 기능 구현
-    public
+    public void addStation(Station station){
+        stations.add(station);
+    }
+
+    public boolean isSameLine(Line other){
+        return this.name.equals(other.name);
+    }
+
+
+
 }

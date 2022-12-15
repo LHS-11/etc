@@ -23,4 +23,16 @@ public class LineRepository {
     public static void deleteAll() {
         lines.clear();
     }
+
+    public void addStationToLine(Line line,Station station){
+        Line foundLine = findLine(line);
+        foundLine.addStation(station);
+    }
+
+    private static Line findLine(Line line) {
+        return lines.stream().filter(l -> l.isSameLine(line))
+                .findAny()
+                .get();
+    }
+
 }
