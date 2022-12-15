@@ -24,7 +24,6 @@ public class RouteRepository {
     public static int getDistanceAmount(List<String> names){
         int amount=0;
         for(int i=0;i<names.size()-1;i++){
-            System.out.println(names.get(i)+" "+names.get(i+1));
             int distance = RouteRepository.getDistance(Arrays.asList(names.get(i), names.get(i + 1)));
             amount += distance;
         }
@@ -40,7 +39,6 @@ public class RouteRepository {
     public static int getTimeAmount(List<String> names){
         int amount=0;
         for(int i=0;i<names.size()-1;i++){
-            System.out.println(names.get(i)+" "+names.get(i+1));
             int distance = RouteRepository.getTime(Arrays.asList(names.get(i), names.get(i + 1)));
             amount += distance;
         }
@@ -53,22 +51,36 @@ public class RouteRepository {
         return route.getTime();
     }
 
-    public static List<String> getDijkstraShortestPath(Station startStation,Station endStation) {
+    public static List<String> getDijkstraShortestPath(Station startStation,Station endStation,Criteria criteria) {
         WeightedMultigraph<String, DefaultWeightedEdge> graph
                 = new WeightedMultigraph(DefaultWeightedEdge.class);
+        makeGraph(criteria, graph);
+        DijkstraShortestPath dijkstraShortestPath = new DijkstraShortestPath(graph);
+        List<String> shortestPath = dijkstraShortestPath.getPath(startStation.getName(), endStation.getName()).getVertexList();
+        return shortestPath;
+    }
 
+    private static void makeGraph(Criteria criteria, WeightedMultigraph<String, DefaultWeightedEdge> graph) {
         for (Route route : routeGroup) {
             List<Station> stations = route.getStations();
-            int distance = route.getDistance();
+            int weight=getWeight(criteria,route);
+            getWeight(criteria, route);
             Station s1 = stations.get(0);
             Station s2 = stations.get(1);
             graph.addVertex(s1.getName());
             graph.addVertex(s2.getName());
-            graph.setEdgeWeight(graph.addEdge(s1.getName(),s2.getName()),distance);
+            graph.setEdgeWeight(graph.addEdge(s1.getName(),s2.getName()),weight);
         }
+    }
 
-        DijkstraShortestPath dijkstraShortestPath = new DijkstraShortestPath(graph);
-        List<String> shortestPath = dijkstraShortestPath.getPath(startStation.getName(), endStation.getName()).getVertexList();
-        return shortestPath;
+    private static int getWeight(Criteria criteria, Route route) {
+        int weight=0;
+        if(criteria ==Criteria.DISTANCE){
+            weight = route.getDistance();
+        }
+        if(criteria ==Criteria.TIME){
+            weight = route.getTime();
+        }
+        return weight;
     }
 }

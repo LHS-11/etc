@@ -1,12 +1,12 @@
 package subway.controller;
 
+import subway.domain.Criteria;
 import subway.domain.RouteCriteriaCommand;
 import subway.domain.RouteRepository;
 import subway.domain.Station;
 import subway.view.InputView;
 import subway.view.OutputView;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static subway.domain.RouteCriteriaCommand.*;
@@ -26,25 +26,29 @@ public class RouteReadingController implements Controller{
     public void play() {
         outputView.printRouteMenu();
         RouteCriteriaCommand command = from(inputView.inputMainCommand());
-        readShortestDistance(command);
-        if(command.equals(MINIMUM_TIME)){
+        readShortestDistance(command,Criteria.DISTANCE);
+        readShortestTime(command,Criteria.TIME);
+    }
 
+    private void readShortestTime(RouteCriteriaCommand command,Criteria criteria) {
+        if(command.equals(MINIMUM_TIME)){
+            makeShortestRoute(criteria);
         }
     }
 
-    private void readShortestDistance(RouteCriteriaCommand command) {
+    private void readShortestDistance(RouteCriteriaCommand command, Criteria criteria) {
         if(command.equals(MINIMUM_ROUTE)){
-            Station startStation = getStartStation();
-            Station endStation = getEndStation(startStation);
-            List<String> shortestPathName = RouteRepository.getDijkstraShortestPath(startStation, endStation);
-            int distanceAmount = RouteRepository.getDistanceAmount(shortestPathName);
-            int timeAmount = RouteRepository.getTimeAmount(shortestPathName);
-            System.out.println("[INFO] ---");
-            System.out.println("[INFO] 총 거리: "+distanceAmount+"km");
-            System.out.println("[INFO] 총 소요 시간: "+timeAmount+"분");
-            System.out.println("[INFO] ---");
-            shortestPathName.stream().forEach(s -> System.out.println("[INFO] "+s));
+            makeShortestRoute(criteria);
         }
+    }
+
+    private void makeShortestRoute(Criteria criteria) {
+        Station startStation = getStartStation();
+        Station endStation = getEndStation(startStation);
+        List<String> shortestPathName = RouteRepository.getDijkstraShortestPath(startStation, endStation, criteria);
+        int distanceAmount = RouteRepository.getDistanceAmount(shortestPathName);
+        int timeAmount = RouteRepository.getTimeAmount(shortestPathName);
+        outputView.printResult(distanceAmount, timeAmount,shortestPathName);
     }
 
     private Station getStartStation() {
