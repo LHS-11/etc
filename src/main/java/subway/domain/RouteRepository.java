@@ -37,6 +37,22 @@ public class RouteRepository {
         return route.getDistance();
     }
 
+    public static int getTimeAmount(List<String> names){
+        int amount=0;
+        for(int i=0;i<names.size()-1;i++){
+            System.out.println(names.get(i)+" "+names.get(i+1));
+            int distance = RouteRepository.getTime(Arrays.asList(names.get(i), names.get(i + 1)));
+            amount += distance;
+        }
+        return amount;
+    }
+    public static int getTime(List<String> names){
+        Route route = routeGroup.stream().filter(r -> r.isSameRoute(names))
+                .findAny()
+                .get();
+        return route.getTime();
+    }
+
     public static List<String> getDijkstraShortestPath(Station startStation,Station endStation) {
         WeightedMultigraph<String, DefaultWeightedEdge> graph
                 = new WeightedMultigraph(DefaultWeightedEdge.class);

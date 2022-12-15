@@ -38,7 +38,11 @@ public class RouteReadingController implements Controller{
             Station endStation = getEndStation(startStation);
             List<String> shortestPathName = RouteRepository.getDijkstraShortestPath(startStation, endStation);
             int distanceAmount = RouteRepository.getDistanceAmount(shortestPathName);
-            System.out.println(distanceAmount);
+            int timeAmount = RouteRepository.getTimeAmount(shortestPathName);
+            System.out.println("[INFO] ---");
+            System.out.println("[INFO] 총 거리: "+distanceAmount+"km");
+            System.out.println("[INFO] 총 소요 시간: "+timeAmount+"분");
+            System.out.println("[INFO] ---");
             shortestPathName.stream().forEach(s -> System.out.println("[INFO] "+s));
         }
     }
