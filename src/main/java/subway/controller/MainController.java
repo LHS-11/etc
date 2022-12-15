@@ -22,15 +22,29 @@ public class MainController implements Controller{
 
     public void initController(){
         controllers.put(MainCommand.FIRST, new RouteReadingController());
+        controllers.put(MainCommand.SECOND, new QuitController());
     }
 
 
     @Override
     public void play() {
+        initController();
         MainCommand mainCommand = null;
         do{
-            mainCommand = MainCommand.from(inputView.inputMainCommand());
+            outputView.printMainMenu();
+            mainCommand = getMainCommand(mainCommand);
             controllers.get(mainCommand).play();
         }while (!mainCommand.isClose());
+    }
+
+
+    private MainCommand getMainCommand(MainCommand mainCommand) {
+        try {
+            mainCommand = MainCommand.from(inputView.inputMainCommand());
+        }catch (IllegalArgumentException e){
+            outputView.printErrorMessage(e.getMessage());
+            return getMainCommand(mainCommand);
+        }
+        return mainCommand;
     }
 }
