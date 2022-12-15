@@ -1,11 +1,15 @@
 package subway.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Station {
     private String name;
 
-    private Line line;
+    private List<Line> lines;
     public Station(String name) {
         this.name = name;
+        lines = new ArrayList<>();
     }
 
     public String getName() {
@@ -18,7 +22,7 @@ public class Station {
     }
 
     public void addLine(Line line){
-        this.line = line;
+        lines.add(line);
     }
 
 

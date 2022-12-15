@@ -29,7 +29,7 @@ public class StationRepository {
         foundStation.addLine(line);
     }
 
-    public Station findStation(Station station) {
+    public static Station findStation(Station station) {
         return stations.stream().filter(s -> s.isSameStation(station))
                 .findAny()
                 .get();

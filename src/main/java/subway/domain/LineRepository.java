@@ -29,7 +29,7 @@ public class LineRepository {
         foundLine.addStation(station);
     }
 
-    private static Line findLine(Line line) {
+    public static Line findLine(Line line) {
         return lines.stream().filter(l -> l.isSameLine(line))
                 .findAny()
                 .get();
@@ -52,5 +52,6 @@ public class LineRepository {
     private static boolean isPresentStationSameLine(Station station, Line foundLine) {
         return foundLine.getStations().stream().anyMatch(s -> s.isSameStation(station));
     }
+
 
 }

@@ -16,6 +16,10 @@ public class RouteRepository {
         return Collections.unmodifiableList(routeGroup);
     }
 
+    public static void addRoute(Route route){
+        routeGroup.add(route);
+    }
+
     public static List<Station> getDijkstraShortestPath(Station startStation,Station endStation) {
         WeightedMultigraph<Station, DefaultWeightedEdge> graph
                 = new WeightedMultigraph(DefaultWeightedEdge.class);

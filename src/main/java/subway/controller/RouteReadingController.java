@@ -1,9 +1,7 @@
 package subway.controller;
 
 import subway.domain.RouteCriteriaCommand;
-import subway.domain.RouteRepository;
 import subway.domain.Station;
-import subway.domain.StationRepository;
 import subway.view.InputView;
 import subway.view.OutputView;
 
@@ -22,6 +20,7 @@ public class RouteReadingController implements Controller{
 
     @Override
     public void play() {
+        outputView.printRouteMenu();
         RouteCriteriaCommand command = from(inputView.inputMainCommand());
         readShortestDistance(command);
         if(command.equals(MINIMUM_TIME)){
@@ -31,19 +30,30 @@ public class RouteReadingController implements Controller{
 
     private void readShortestDistance(RouteCriteriaCommand command) {
         if(command.equals(MINIMUM_ROUTE)){
-            Station startStation = getStation();
-
+            Station startStation = getEndStation();
+            Station endStation = getEndStation();
         }
     }
 
-    private Station getStation() {
+    private Station getStartStation() {
         try {
             Station station = new Station(inputView.inputStartStation());
             validatePresentStation(station);
             return station;
         }catch (IllegalArgumentException e){
             outputView.printErrorMessage(e.getMessage());
-            return getStation();
+            return getEndStation();
+        }
+    }
+
+    private Station getEndStation() {
+        try {
+            Station station = new Station(inputView.inputEndStation());
+            validatePresentStation(station);
+            return station;
+        }catch (IllegalArgumentException e){
+            outputView.printErrorMessage(e.getMessage());
+            return getEndStation();
         }
     }
 }
