@@ -34,10 +34,22 @@ public class StationRepository {
                 .findAny()
                 .get();
     }
-    public void validateDuplicatedStation(Station station){
+    public static void validateDuplicatedStation(Station station){
         stations.stream().filter(s -> s.isSameStation(station))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("[ERROR] : 이미 존재하는 역입니다."));
+    }
+
+    public static void validatePresentStation(Station station){
+        boolean found = isFound(station);
+        if(found){
+            return;
+        }
+        throw new IllegalArgumentException("[ERROR] : 존재하지 않는 역입니다.");
+    }
+
+    private static boolean isFound(Station station) {
+        return stations.stream().anyMatch(s -> s.isSameStation(station));
     }
 
 }
