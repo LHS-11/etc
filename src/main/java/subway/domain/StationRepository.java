@@ -52,4 +52,16 @@ public class StationRepository {
         return stations.stream().anyMatch(s -> s.isSameStation(station));
     }
 
+    private static boolean isSame(Station s1,Station s2){
+        return s1.getName().equals(s2.getName());
+    }
+
+    public static void validateSameStation(Station s1,Station s2){
+        if(isSame(s1,s2)){
+            throw new IllegalArgumentException("[ERROR] : 출발역과 도착역이 동일합니다.");
+        }
+    }
+
+
+
 }

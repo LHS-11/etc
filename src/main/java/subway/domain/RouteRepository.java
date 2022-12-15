@@ -20,8 +20,8 @@ public class RouteRepository {
         routeGroup.add(route);
     }
 
-    public static List<Station> getDijkstraShortestPath(Station startStation,Station endStation) {
-        WeightedMultigraph<Station, DefaultWeightedEdge> graph
+    public static List<String> getDijkstraShortestPath(Station startStation,Station endStation) {
+        WeightedMultigraph<String, DefaultWeightedEdge> graph
                 = new WeightedMultigraph(DefaultWeightedEdge.class);
 
         for (Route route : routeGroup) {
@@ -29,13 +29,14 @@ public class RouteRepository {
             int distance = route.getDistance();
             Station s1 = stations.get(0);
             Station s2 = stations.get(1);
-            graph.addVertex(s1);
-            graph.addVertex(s2);
-            graph.setEdgeWeight(graph.addEdge(s1,s2),distance);
+            System.out.println(s1.getName()+" "+s2.getName());
+            graph.addVertex(s1.getName());
+            graph.addVertex(s2.getName());
+            graph.setEdgeWeight(graph.addEdge(s1.getName(),s2.getName()),distance);
         }
 
         DijkstraShortestPath dijkstraShortestPath = new DijkstraShortestPath(graph);
-        List<Station> shortestPath = dijkstraShortestPath.getPath(startStation, endStation).getVertexList();
+        List<String> shortestPath = dijkstraShortestPath.getPath(startStation.getName(), endStation.getName()).getVertexList();
         return shortestPath;
     }
 }

@@ -1,9 +1,12 @@
 package subway.controller;
 
 import subway.domain.RouteCriteriaCommand;
+import subway.domain.RouteRepository;
 import subway.domain.Station;
 import subway.view.InputView;
 import subway.view.OutputView;
+
+import java.util.List;
 
 import static subway.domain.RouteCriteriaCommand.*;
 import static subway.domain.StationRepository.*;
@@ -30,8 +33,10 @@ public class RouteReadingController implements Controller{
 
     private void readShortestDistance(RouteCriteriaCommand command) {
         if(command.equals(MINIMUM_ROUTE)){
-            Station startStation = getEndStation();
-            Station endStation = getEndStation();
+            Station startStation = getStartStation();
+            Station endStation = getEndStation(startStation);
+            List<String> shortestPath = RouteRepository.getDijkstraShortestPath(startStation, endStation);
+            shortestPath.stream().forEach(s -> System.out.println("[INFO] "+s));
         }
     }
 
@@ -42,18 +47,19 @@ public class RouteReadingController implements Controller{
             return station;
         }catch (IllegalArgumentException e){
             outputView.printErrorMessage(e.getMessage());
-            return getEndStation();
+            return getStartStation();
         }
     }
 
-    private Station getEndStation() {
+    private Station getEndStation(Station startStation) {
         try {
-            Station station = new Station(inputView.inputEndStation());
-            validatePresentStation(station);
-            return station;
+            Station endStation = new Station(inputView.inputEndStation());
+            validatePresentStation(endStation);
+            validateSameStation(startStation,endStation);
+            return endStation;
         }catch (IllegalArgumentException e){
             outputView.printErrorMessage(e.getMessage());
-            return getEndStation();
+            return getEndStation(startStation);
         }
     }
 }
