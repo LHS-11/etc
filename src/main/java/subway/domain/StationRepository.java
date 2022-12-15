@@ -34,4 +34,10 @@ public class StationRepository {
                 .findAny()
                 .get();
     }
+    public void validateDuplicatedStation(Station station){
+        stations.stream().filter(s -> s.isSameStation(station))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("[ERROR] : 이미 존재하는 역입니다."));
+    }
+
 }

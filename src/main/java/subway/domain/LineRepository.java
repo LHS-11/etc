@@ -35,4 +35,22 @@ public class LineRepository {
                 .get();
     }
 
+    public void validateDuplicatedLine(Line line){
+        lines.stream().filter(s -> s.isSameLine(line))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("[ERROR] : 이미 존재하는 노선입니다."));
+    }
+
+    public void validatePresentSameLine(Line line, Station station){
+        Line foundLine = findLine(line);
+        if(isPresentStationSameLine(station, foundLine)){
+            throw new IllegalArgumentException("[ERROR] : 같은 노선에 같은 역이 존재합니다");
+        }
+
+    }
+
+    private static boolean isPresentStationSameLine(Station station, Line foundLine) {
+        return foundLine.getStations().stream().anyMatch(s -> s.isSameStation(station));
+    }
+
 }
