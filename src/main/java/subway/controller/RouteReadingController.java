@@ -30,25 +30,19 @@ public class RouteReadingController implements Controller{
         readShortestTime(command,Criteria.TIME);
     }
 
-    private void readShortestTime(RouteCriteriaCommand command,Criteria criteria) {
-        if(command.equals(MINIMUM_TIME)){
-            makeShortestRoute(criteria);
-        }
-    }
-
-    private void readShortestDistance(RouteCriteriaCommand command, Criteria criteria) {
-        if(command.equals(MINIMUM_ROUTE)){
-            makeShortestRoute(criteria);
-        }
-    }
 
     private void makeShortestRoute(Criteria criteria) {
         Station startStation = getStartStation();
         Station endStation = getEndStation(startStation);
         List<String> shortestPathName = RouteRepository.getDijkstraShortestPath(startStation, endStation, criteria);
-        int distanceAmount = RouteRepository.getDistanceAmount(shortestPathName);
-        int timeAmount = RouteRepository.getTimeAmount(shortestPathName);
-        outputView.printResult(distanceAmount, timeAmount,shortestPathName);
+        try {
+            validateSameStation(startStation,endStation);
+            int distanceAmount = RouteRepository.getDistanceAmount(shortestPathName);
+            int timeAmount = RouteRepository.getTimeAmount(shortestPathName);
+            outputView.printResult(distanceAmount, timeAmount, shortestPathName);
+        }catch (Exception e){
+            outputView.printErrorMessage(e.getMessage());
+        }
     }
 
     private Station getStartStation() {
@@ -66,11 +60,21 @@ public class RouteReadingController implements Controller{
         try {
             Station endStation = new Station(inputView.inputEndStation());
             validatePresentStation(endStation);
-            validateSameStation(startStation,endStation);
             return endStation;
         }catch (IllegalArgumentException e){
             outputView.printErrorMessage(e.getMessage());
             return getEndStation(startStation);
+        }
+    }
+    private void readShortestTime(RouteCriteriaCommand command,Criteria criteria) {
+        if(command.equals(MINIMUM_TIME)){
+            makeShortestRoute(criteria);
+        }
+    }
+
+    private void readShortestDistance(RouteCriteriaCommand command, Criteria criteria) {
+        if(command.equals(MINIMUM_ROUTE)){
+            makeShortestRoute(criteria);
         }
     }
 
