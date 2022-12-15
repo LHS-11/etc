@@ -6,6 +6,7 @@ import subway.domain.Station;
 import subway.view.InputView;
 import subway.view.OutputView;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static subway.domain.RouteCriteriaCommand.*;
@@ -35,8 +36,10 @@ public class RouteReadingController implements Controller{
         if(command.equals(MINIMUM_ROUTE)){
             Station startStation = getStartStation();
             Station endStation = getEndStation(startStation);
-            List<String> shortestPath = RouteRepository.getDijkstraShortestPath(startStation, endStation);
-            shortestPath.stream().forEach(s -> System.out.println("[INFO] "+s));
+            List<String> shortestPathName = RouteRepository.getDijkstraShortestPath(startStation, endStation);
+            int distanceAmount = RouteRepository.getDistanceAmount(shortestPathName);
+            System.out.println(distanceAmount);
+            shortestPathName.stream().forEach(s -> System.out.println("[INFO] "+s));
         }
     }
 
@@ -62,4 +65,6 @@ public class RouteReadingController implements Controller{
             return getEndStation(startStation);
         }
     }
+
+
 }
