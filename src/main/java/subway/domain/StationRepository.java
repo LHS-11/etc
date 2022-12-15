@@ -24,7 +24,7 @@ public class StationRepository {
         stations.clear();
     }
 
-    public void addStationToLine(Station station, Line line) {
+    public void addLineToStation(Station station, Line line) {
         Station foundStation = findStation(station);
         foundStation.addLine(line);
     }
