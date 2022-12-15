@@ -18,6 +18,7 @@ public class MainController implements Controller{
         controllers = new EnumMap<MainCommand, Controller>(MainCommand.class);
         inputView = new InputView();
         outputView = new OutputView();
+        initController();
     }
 
     public void initController(){
@@ -28,7 +29,7 @@ public class MainController implements Controller{
 
     @Override
     public void play() {
-        initController();
+        InitController.init();
         MainCommand mainCommand = null;
         do{
             outputView.printMainMenu();
