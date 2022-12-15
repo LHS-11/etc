@@ -1,0 +1,36 @@
+package subway.controller;
+
+import com.sun.tools.javac.Main;
+import subway.domain.MainCommand;
+import subway.view.InputView;
+import subway.view.OutputView;
+
+import java.util.EnumMap;
+import java.util.Map;
+
+public class MainController implements Controller{
+
+    private final Map<MainCommand,Controller> controllers;
+    private final InputView inputView;
+    private final OutputView outputView;
+
+    public MainController(){
+        controllers = new EnumMap<MainCommand, Controller>(MainCommand.class);
+        inputView = new InputView();
+        outputView = new OutputView();
+    }
+
+    public void initController(){
+        controllers.put(MainCommand.FIRST, new RouteReadingController());
+    }
+
+
+    @Override
+    public void play() {
+        MainCommand mainCommand = null;
+        do{
+            mainCommand = MainCommand.from(inputView.inputMainCommand());
+            controllers.get(mainCommand).play();
+        }while (!mainCommand.isClose());
+    }
+}
