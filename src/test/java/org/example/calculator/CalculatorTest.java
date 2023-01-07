@@ -1,6 +1,7 @@
-package org.example;
+package org.example.calculator;
 
-import org.assertj.core.api.Assertions;
+import org.example.calculator.Calculator;
+import org.example.calculator.PositiveNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
