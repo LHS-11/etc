@@ -49,7 +49,7 @@ class ArticleControllerTest {
         //when & then
         mvc.perform(get("/articles/1"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.TEXT_HTML))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
                 .andExpect(view().name("articles/detail"))
                 .andExpect(model().attributeExists("articleComments"))
                 .andExpect(model().attributeExists("article")); // data 안쪽까지 validation 하는 것은 아니고 articles 라는 이름을 가진 모델이 있는지 확인 가능
@@ -66,7 +66,7 @@ class ArticleControllerTest {
         //when & then
         mvc.perform(get("/articles/search"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.TEXT_HTML))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
                 .andExpect(model().attributeExists("article/search")); // data 안쪽까지 validation 하는 것은 아니고 articles 라는 이름을 가진 모델이 있는지 확인 가능
 
     }
@@ -80,7 +80,7 @@ class ArticleControllerTest {
         //when & then
         mvc.perform(get("/articles/search-hashtag"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.TEXT_HTML))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
                 .andExpect(model().attributeExists("article/search-hashtag")); // data 안쪽까지 validation 하는 것은 아니고 articles 라는 이름을 가진 모델이 있는지 확인 가능
 
     }
