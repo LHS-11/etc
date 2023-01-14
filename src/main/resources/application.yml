@@ -43,6 +43,8 @@ spring:
       enabled: true
     restart:
       enabled: true
+  thymeleaf3:
+    decoupled-logic: true
 
 #  data:
 #    rest:
