@@ -24,7 +24,6 @@ class ArticleControllerTest {
         this.mvc = mvc;
     }
 
-    @Disabled("구현 중")
     @DisplayName("[view][Get] 게시글 리스트 (게시판) 페이지 - 정상 호출")
     @Test
     void test1() throws Exception {
@@ -33,9 +32,8 @@ class ArticleControllerTest {
         //when & then
         mvc.perform(get("/articles"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.TEXT_HTML))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
                 .andExpect(view().name("articles/index"))
-                .andExpect(model().attributeExiste("articleComments"))
                 .andExpect(model().attributeExists("articles")); // data 안쪽까지 validation 하는 것은 아니고 articles 라는 이름을 가진 모델이 있는지 확인 가능
 
 
