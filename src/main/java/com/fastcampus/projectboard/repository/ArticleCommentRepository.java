@@ -12,6 +12,8 @@ import org.springframework.data.querydsl.binding.QuerydslBindings;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @RepositoryRestResource
 @Repository
 public interface ArticleCommentRepository extends
@@ -19,6 +21,7 @@ public interface ArticleCommentRepository extends
         QuerydslPredicateExecutor<ArticleComment>,
         QuerydslBinderCustomizer<QArticleComment>
 {
+    List<ArticleComment> findByArticle_Id(Long articleId);
     @Override
     default void customize(QuerydslBindings bindings, QArticleComment root){
         bindings.excludeUnlistedProperties(true);
