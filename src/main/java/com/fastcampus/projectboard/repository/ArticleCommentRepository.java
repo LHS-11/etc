@@ -15,7 +15,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @RepositoryRestResource
-@Repository
 public interface ArticleCommentRepository extends
         JpaRepository<ArticleComment,Long>,
         QuerydslPredicateExecutor<ArticleComment>,
