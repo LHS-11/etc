@@ -1,0 +1,59 @@
+GET http://localhost:8080/users
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=7AC69FA76950FA07EA42423A962360C2
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-01-09T172628.200.html
+
+###
+
+GET http://localhost:8080/users
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=7AC69FA76950FA07EA42423A962360C2
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-01-09T172227.404.html
+
+###
+
+GET http://localhost:8080/users
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=7AC69FA76950FA07EA42423A962360C2
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-01-09T172144.404.html
+
+###
+
+GET http://localhost:8080/users
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=7AC69FA76950FA07EA42423A962360C2
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-01-09T172128.404.html
+
+###
+
+GET http://localhost:8080/users
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=7AC69FA76950FA07EA42423A962360C2
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-01-09T172025.404.html
+
+###
+
+GET http://localhost:8080/users
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-01-09T161114.200.html
+
+###
+
