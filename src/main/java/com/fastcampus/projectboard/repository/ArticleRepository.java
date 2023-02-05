@@ -2,6 +2,7 @@ package com.fastcampus.projectboard.repository;
 
 import com.fastcampus.projectboard.domain.Article;
 import com.fastcampus.projectboard.domain.QArticle;
+import com.fastcampus.projectboard.repository.querydsl.ArticleRepositoryCustom;
 import com.querydsl.core.types.dsl.DateTimeExpression;
 import com.querydsl.core.types.dsl.SimpleExpression;
 import com.querydsl.core.types.dsl.StringExpression;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Repository;
 // @Repository 굳이 안붙여도 됨. JpaRepository 상위클래스에서 이미 어노테이션이 붙어 있음
 public interface ArticleRepository extends
         JpaRepository<Article, Long >,
+        ArticleRepositoryCustom,
         QuerydslPredicateExecutor<Article>, // Article 안에 있는 모든 필드에 대한 기본 검사를 추가해줌
         QuerydslBinderCustomizer<QArticle>
 {
