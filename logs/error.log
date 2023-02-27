@@ -1,0 +1,2 @@
+#logback.classic pattern: [ERROR] [%-5level] %d{yyyy-MM-dd HH:mm:ss} [%thread] [%logger{40}:%line] - %msg%n
+#logback.classic pattern: [ERROR] [%-5level] %d{yyyy-MM-dd HH:mm:ss} [%thread] [%logger{40}:%line] - %msg%n
