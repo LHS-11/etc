@@ -26,4 +26,4 @@ jobs:
         with:
           files: ${{ env.RESOURCE_PATH }}
         env:
-          override.value: Chris Paul
+          override.value: ${{ secrets.VALUE }}
