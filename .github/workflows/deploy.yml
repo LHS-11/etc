@@ -31,4 +31,4 @@ jobs:
           files: ${{ env.RESOURCE_PATH }}
         env:
           spring.datasource.url: ${{ secrets.RDS_URL }}
-          override.value: Chris Paul
+          override.value: ${{ secrets.VALUE }}
