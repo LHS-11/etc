@@ -1,2 +1,8 @@
-override:
-  value: CP3
+spring:
+  profiles:
+    active: local
+#  datasource:
+#    url: 123
+#    username: 456
+#    password: 789
+#    driver-class-name: com.mysql.cj.jdbc.Driver

@@ -21,9 +21,14 @@ jobs:
         with:
           java-version: 11
 
+      - run: touch ./src/main/resources/application-local.yml
+      - run: echo "${{ secrets.APPLICATION_LOCAL }}" > ./src/main/resources/application-local.yml
+      - run: cat ./src/main/resources/application-local.yml
+
       - name: Set yaml file
         uses: microsoft/variable-substitution@v1
         with:
           files: ${{ env.RESOURCE_PATH }}
         env:
+          spring.datasource.url: ${{ secrets.RDS_URL }}
           override.value: Chris Paul
