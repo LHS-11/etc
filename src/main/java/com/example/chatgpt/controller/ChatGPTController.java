@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/gpt")
 @RestController
-public class GptController {
+public class ChatGPTController {
 
     private final GptService gptService;
 
