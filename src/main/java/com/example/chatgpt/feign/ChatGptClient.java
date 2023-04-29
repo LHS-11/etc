@@ -1,7 +1,9 @@
 package com.example.chatgpt.feign;
 
+import com.example.chatgpt.dto.reponse.ChatGPTImageResponse;
 import com.example.chatgpt.dto.reponse.ChatGPTResponse;
 import com.example.chatgpt.dto.request.ChatGPTEditRequestFeign;
+import com.example.chatgpt.dto.request.ChatGPTImageRequestFeign;
 import com.example.chatgpt.dto.request.ChatGPTQueryRequestFeign;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,4 +26,8 @@ public interface ChatGptClient {
 
     @PostMapping("/edits")
     ChatGPTResponse getGPTEditApiResponse(@RequestBody ChatGPTEditRequestFeign chatGPTEditRequestFeign);
+
+    @PostMapping("/images/generations")
+    ChatGPTImageResponse getGPTImageApiResponse(@RequestBody ChatGPTImageRequestFeign chatGPTImageRequestFeign);
+
 }

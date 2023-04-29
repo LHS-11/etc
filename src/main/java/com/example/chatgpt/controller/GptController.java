@@ -1,8 +1,10 @@
 package com.example.chatgpt.controller;
 
 import com.example.chatgpt.base.BaseResponse;
+import com.example.chatgpt.dto.reponse.ChatGPTImageResponse;
 import com.example.chatgpt.dto.reponse.ChatGPTResponse;
 import com.example.chatgpt.dto.request.ChatGPTEditRequest;
+import com.example.chatgpt.dto.request.ChatGPTImageRequest;
 import com.example.chatgpt.dto.request.ChatGPTQueryRequest;
 import com.example.chatgpt.service.GptService;
 import lombok.RequiredArgsConstructor;
@@ -46,8 +48,24 @@ public class GptController {
     public BaseResponse<ChatGPTResponse> callEditApi(@Validated @RequestBody
                                                      ChatGPTEditRequest chatGPTEditRequest, BindingResult bindingResult){
         log.info(chatGPTEditRequest.toString());
+        if(bindingResult.hasErrors()){
+            ObjectError objectError = bindingResult.getAllErrors().stream().findFirst().get();
+            return BaseResponse.onFailure(400, objectError.getDefaultMessage(),null);
+        }
         ChatGPTResponse answer = gptService.getEditAnswer(chatGPTEditRequest);
         return BaseResponse.onSuccess(answer);
+    }
+
+    @PostMapping("/generate/image")
+    public BaseResponse<ChatGPTImageResponse> callImageApi(@Validated @RequestBody
+                                                           ChatGPTImageRequest chatGPTImageRequest, BindingResult bindingResult){
+        log.info(chatGPTImageRequest.toString());
+        if(bindingResult.hasErrors()){
+            ObjectError objectError = bindingResult.getAllErrors().stream().findFirst().get();
+            return BaseResponse.onFailure(400, objectError.getDefaultMessage(),null);
+        }
+        ChatGPTImageResponse image = gptService.getImage(chatGPTImageRequest);
+        return BaseResponse.onSuccess(image);
     }
 
 
