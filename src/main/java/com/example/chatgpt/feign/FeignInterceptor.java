@@ -16,14 +16,11 @@ public final class FeignInterceptor implements RequestInterceptor {
 
     @Override
     public void apply(RequestTemplate template) {
-        if(template.method()== HttpMethod.POST.name()){
+        if (template.method() == HttpMethod.POST.name()) {
             template.header("Content-Type", "application/json");
             template.header("Authorization", "Bearer " + key);
             log.info("[Authorization] {}", template.headers().get("Authorization"));
-//            log.info("[GET] Github nickname Path {}",template.path());
         }
-        return;
     }
-
-
 }
+
