@@ -32,7 +32,7 @@ public class ChatGPTController {
      * @return
      */
     @PostMapping("/query")
-    public BaseResponse<ChatGPTResponse> callApi(@Validated @RequestBody
+    public BaseResponse<ChatGPTResponse> callQueryApi(@Validated @RequestBody
                                                  ChatGPTQueryRequest chatGPTQueryRequest, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             ObjectError objectError = bindingResult.getAllErrors().stream().findFirst().get();
