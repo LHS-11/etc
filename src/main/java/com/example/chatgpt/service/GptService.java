@@ -18,7 +18,7 @@ public class GptService {
 
     public ChatGPTResponse getQueryAnswer(ChatGPTQueryRequest chatGPTQueryRequest){
         log.info(chatGPTQueryRequest.toString());
-        ChatGPTResponse chatGPTResponse = client.getGptApiResponse(ChatGPTQueryRequestFeign.from(chatGPTQueryRequest));
+        ChatGPTResponse chatGPTResponse = client.getGPTQueryApiResponse(ChatGPTQueryRequestFeign.from(chatGPTQueryRequest));
         return chatGPTResponse;
     }
 

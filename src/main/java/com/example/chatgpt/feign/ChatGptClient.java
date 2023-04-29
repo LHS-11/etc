@@ -22,7 +22,7 @@ public interface ChatGptClient {
 //            "Authorization: Bearer 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"
 //    })
     @PostMapping("/completions")
-    ChatGPTResponse getGptApiResponse(@RequestBody ChatGPTQueryRequestFeign chatGPTQueryRequestFeign);
+    ChatGPTResponse getGPTQueryApiResponse(@RequestBody ChatGPTQueryRequestFeign chatGPTQueryRequestFeign);
 
     @PostMapping("/edits")
     ChatGPTResponse getGPTEditApiResponse(@RequestBody ChatGPTEditRequestFeign chatGPTEditRequestFeign);
