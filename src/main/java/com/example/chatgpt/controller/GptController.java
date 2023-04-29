@@ -36,10 +36,12 @@ public class GptController {
             return BaseResponse.onFailure(400, objectError.getDefaultMessage(),null);
         }
         log.info(chatGPTQueryRequest.toString());
-        ChatGPTResponse answer = gptService.getAnswer(chatGPTQueryRequest);
+        ChatGPTResponse answer = gptService.getQueryAnswer(chatGPTQueryRequest);
         log.info(answer.toString());
         return BaseResponse.onSuccess(answer);
     }
+
+
 
     
 

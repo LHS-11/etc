@@ -2,7 +2,7 @@ package com.example.chatgpt.service;
 
 
 import com.example.chatgpt.dto.reponse.ChatGPTResponse;
-import com.example.chatgpt.dto.request.ChatGPTRequest;
+import com.example.chatgpt.dto.request.ChatGPTQueryRequestFeign;
 import com.example.chatgpt.dto.request.ChatGPTQueryRequest;
 import com.example.chatgpt.feign.ChatGptClient;
 import lombok.RequiredArgsConstructor;
@@ -16,10 +16,10 @@ public class GptService {
 
     private final ChatGptClient client;
 
-    public ChatGPTResponse getAnswer(ChatGPTQueryRequest chatGPTQueryRequest){
+    public ChatGPTResponse getQueryAnswer(ChatGPTQueryRequest chatGPTQueryRequest){
         log.info(chatGPTQueryRequest.toString());
-        ChatGPTResponse chatGPTResponse = client.getGptApiResponse(ChatGPTRequest.from(chatGPTQueryRequest));
-
+        ChatGPTResponse chatGPTResponse = client.getGptApiResponse(ChatGPTQueryRequestFeign.from(chatGPTQueryRequest));
         return chatGPTResponse;
     }
+
 }
