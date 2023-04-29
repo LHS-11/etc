@@ -16,11 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 )
 public interface ChatGptClient {
 
-
-//    @Headers({
-//            "Content-Type: application/json",
-//            "Authorization: Bearer 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"
-//    })
     @PostMapping("/completions")
     ChatGPTResponse getGPTQueryApiResponse(@RequestBody ChatGPTQueryRequestFeign chatGPTQueryRequestFeign);
 
