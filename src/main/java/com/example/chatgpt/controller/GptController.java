@@ -2,6 +2,7 @@ package com.example.chatgpt.controller;
 
 import com.example.chatgpt.base.BaseResponse;
 import com.example.chatgpt.dto.reponse.ChatGPTResponse;
+import com.example.chatgpt.dto.request.ChatGPTEditRequest;
 import com.example.chatgpt.dto.request.ChatGPTQueryRequest;
 import com.example.chatgpt.service.GptService;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,7 @@ public class GptController {
      * @param bindingResult
      * @return
      */
-    @PostMapping
+    @PostMapping("/query")
     public BaseResponse<ChatGPTResponse> callApi(@Validated @RequestBody
                                                  ChatGPTQueryRequest chatGPTQueryRequest, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
@@ -40,6 +41,15 @@ public class GptController {
         log.info(answer.toString());
         return BaseResponse.onSuccess(answer);
     }
+
+    @PostMapping("/edit")
+    public BaseResponse<ChatGPTResponse> callEditApi(@Validated @RequestBody
+                                                     ChatGPTEditRequest chatGPTEditRequest, BindingResult bindingResult){
+        log.info(chatGPTEditRequest.toString());
+        ChatGPTResponse answer = gptService.getEditAnswer(chatGPTEditRequest);
+        return BaseResponse.onSuccess(answer);
+    }
+
 
 
 

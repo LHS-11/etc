@@ -1,7 +1,8 @@
 package com.example.chatgpt.feign;
 
 import com.example.chatgpt.dto.reponse.ChatGPTResponse;
-import com.example.chatgpt.dto.request.ChatGPTRequest;
+import com.example.chatgpt.dto.request.ChatGPTEditRequestFeign;
+import com.example.chatgpt.dto.request.ChatGPTQueryRequestFeign;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,5 +20,8 @@ public interface ChatGptClient {
 //            "Authorization: Bearer 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"
 //    })
     @PostMapping("/completions")
-    ChatGPTResponse getGptApiResponse(@RequestBody ChatGPTRequest chatGPTRequest);
+    ChatGPTResponse getGptApiResponse(@RequestBody ChatGPTQueryRequestFeign chatGPTQueryRequestFeign);
+
+    @PostMapping("/edits")
+    ChatGPTResponse getGPTEditApiResponse(@RequestBody ChatGPTEditRequestFeign chatGPTEditRequestFeign);
 }
