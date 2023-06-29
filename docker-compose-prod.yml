@@ -19,8 +19,6 @@ services:
     environment:
       - MARIADB_DATABASE=gifty-mariadb
       - MARIADB_ROOT_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
-    env_file:
-      - .env
     ports:
       - "3307:3306"
 
