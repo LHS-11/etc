@@ -10,6 +10,20 @@ services:
     ports:
       - "6379:6379"
 
+  maria:
+    container_name: gifty-maria
+    build:
+      dockerfile: Dockerfile
+      context: ./config/database
+    image: limhwasup/gifty-maria
+    environment:
+      - MARIADB_DATABASE=gifty-mariadb
+      - MARIADB_ROOT_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+    env_file:
+      - .env
+    ports:
+      - "3307:3306"
+
   backend-prod:
     image: limhwasup/gifty-server-prod:main
     container_name: backend-prod
@@ -24,6 +38,7 @@ services:
       context: ./config/nginx/prod
     depends_on:
       - redis
+      - maria
       - backend-prod
 #    volumes:
 #      - ./config/nginx/prod:/etc/nginx/conf.d
