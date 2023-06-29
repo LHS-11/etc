@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  redis:
+    container_name: gifty-redis
+    build:
+      dockerfile: Dockerfile
+      context: ./config/redis/
+    image: limhwasup/gifty-redis
+    ports:
+      - "6379:6379"
+
+  backend-prod:
+    image: limhwasup/gifty-server-prod:main
+    container_name: backend-prod
+    hostname: backend-prod
+    expose:
+      - "8080"
+
+  nginx:
+    container_name: gifty-nginx-prod
+    build:
+      dockerfile: Dockerfile
+      context: ./config/nginx/prod
+    depends_on:
+      - redis
+      - backend-prod
+#    volumes:
+#      - ./config/nginx/prod:/etc/nginx/conf.d
+    ports:
+      - "80:80"
+    restart: always
