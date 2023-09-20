@@ -47,7 +47,7 @@
 
 - [메타코딩 jwt 실습](https://github.com/LHS-11/etc/tree/main/jwt)
 
-- [메타코딩 spring security 실](https://github.com/LHS-11/etc/tree/main/security)
+- [메타코딩 spring security 실습](https://github.com/LHS-11/etc/tree/main/security)
 
 <h3>Chat GPT</h3>
 
