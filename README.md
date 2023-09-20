@@ -25,7 +25,7 @@
 
 <h3>우아한 테코톡</h3>
 
-- [10분 테코톡 정리](https://github.com/LHS-11/etc/tree/main/Tech)
+- [개발자로써 기본 CS 지식을 쌓기 위해 테코톡 정리](https://github.com/LHS-11/etc/tree/main/Tech)
 
 <h3>Multi Module</h3>
 
