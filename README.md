@@ -7,11 +7,16 @@
 - [혼자서 Java 공부](https://github.com/LHS-11/etc/tree/main/alone-Java-Study)
 
 <h3>java-little-more</h3>
+
 - [Java Study](https://github.com/LHS-11/etc/tree/main/java-little-more)
 
 <h3>Design Pattern</h3>   
 
 - [Java 를 통한 Desgin Pattern 공부](https://github.com/LHS-11/etc/tree/main/DesginPattern)
+
+<h3>Socket을 이용한 멀티룸 채팅 (java)</h3>
+
+- [멀티룸 채팅](https://github.com/LHS-11/study/tree/main/Team-Talk/src/main)
 
 <h3>우아한 테크코스 백엔드 연습</h3>
 
