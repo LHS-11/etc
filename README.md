@@ -20,13 +20,14 @@
 - [멀티룸 채팅](https://github.com/LHS-11/study/tree/main/Team-Talk/src/main)
   
 <h3>우아한 테크코스 백엔드 프리코스 및 연습</h3>
-- [1주차]
 
-- [2주차] https://github.com/LHS-11/study/tree/main/java-baseball
+- [1주차 onboarding]
+
+- [2주차 야구게임](https://github.com/LHS-11/study/tree/main/java-baseball)
   
-- [3주차] https://github.com/LHS-11/study/tree/main/java-lotto
+- [3주차 로또](https://github.com/LHS-11/study/tree/main/java-lotto)
   
-- [4주차] https://github.com/LHS-11/study/tree/main/java-bridge
+- [4주차 다리 건너기](https://github.com/LHS-11/study/tree/main/java-bridge)
   
 - [점심 메뉴 추천](https://github.com/LHS-11/etc/tree/main/java-menu)
   
